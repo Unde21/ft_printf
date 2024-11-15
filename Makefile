@@ -1,115 +1,74 @@
+# Nom du projet
 NAME = libftprintf.a
 
+CC := cc
+CFLAGS := -Wall -Wextra -Werror
+CPPFFLAGS := -MD -MP -MF
+DEBUGFLAGS := -fsanitize=address -g3
 
-SRCS = srcs/ft_printf.c \
-	srcs/print_format.c \
-	srcs/conversions_format.c \
+RM := rm -rf
+AR := ar -rcs
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+SRC_DIR := srcs/
+OBJ_DIR := .objs/
+DEP_DIR := .deps/
+LIBFT_DIR := libft/
 
-INC_FILE = ft_printf.h libft//libft.h
+INCS := -I . -I $(LIBFT_DIR)
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror 
+SRCS := $(shell find srcs -name "*.c")
+
+OBJS := $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
+DEPS := $(SRCS:$(SRC_DIR)%.c=$(DEP_DIR)%.d)
+
+BONUS_SRCS :=
+BONUS_OBJS := $(BONUS_SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+
+LIBFT := $(LIBFT_DIR)libft.a
+
+BOLD := \033[1m
+GREEN := \033[0;32m
+RED := \033[0;31m
+BLUE := \033[0;34m
+END := \033[0m
 
 
-OBJS = $(SRCS:.c=.o)
+.PHONY: all clean fclean re bonus debug libft
 
-all: lib $(NAME)
+all: $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
-		cp $(LIBFT) $(NAME)
-		ar rcs $(NAME) $(OBJS)
+$(NAME): $(LIBFT) $(OBJS)
+	@cp $(LIBFT) $(NAME)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "$(GREEN)$(BOLD)$(NAME) created successfully!$(END)"
 
-lib:
-	make --no-print-directory -C $(LIBFT_DIR)
 
-%.o: %.c $(INC_FILE)
-	$(CC) $(CFLAGS) -I . -c $< -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR) $(DEP_DIR)
+	@mkdir -p $(dir $@) $(dir $(DEP_DIR)$*)
+	@$(CC) $(CFLAGS) $(INCS) $(CPPFFLAGS) $(DEP_DIR)$*.d -c $< -o $@
+
+$(OBJ_DIR) $(DEP_DIR):
+	@mkdir -p $@
+
+$(LIBFT):
+	@$(MAKE) -C $(LIBFT_DIR)
+
+debug: CFLAGS += $(DEBUGFLAGS)
+debug: re
+
+bonus: SRCS += $(BONUS_SRCS)
+bonus: all
 
 clean:
-	rm -f $(OBJS)
-	make --no-print-directory -C $(LIBFT_DIR) clean
+	@$(RM) $(OBJ_DIR) $(DEP_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@echo "$(RED)$(BOLD)Objects cleaned$(END)"
 
 fclean: clean
-		rm -f $(NAME)
-		make --no-print-directory -C $(LIBFT_DIR) fclean
+	@$(RM) $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@echo "$(RED)$(BOLD)Everything cleaned$(END)"
+
 re: fclean all
 
-.PHONY: all clean fclean re lib
-
-
-#SRCS := ft_printf.c \
-#
-#SRCSB := 
-#
-#NAME = libftprintf.a
-#OBJS_FILE = $(SRCS:.c=.o)
-#OBJS = $(addprefix $(OBJS_DIR), $(OBJS_FILE))
-#OBJSB_FILE = $(SRCSB:.c=.o)
-#OBJSB = $(addprefix $(OBJS_DIR), $(OBJSB_FILE))
-#OBJS_DIR = .objs/
-#INCS = -I . libft/libft.h
-#CC := cc
-#CFLAGS := -Wall -Wextra -Werror -fsanitize=address -g3 
-#RM := rm -rf
-#AR := ar -rcs
-#DEPS_FILE = $(SRCS:.c=.d)
-#DEPS = $(addprefix $(DEPS_DIR), $(DEPS_FILE))
-#CPPFFLAGS = -MD -MP -MF
-#DEPS_DIR = .deps/
-#LIBFT_DIR = libft
-#LIBFT = $(LIBFT_DIR)/libft.a
-#
-#
-#
-#
-#BOLD = \033[1m
-#GREEN=\033[0;32m
-#RED=\033[0;31m
-#BLUE=\033[0;34m
-#COLOR_END=\033[0m
-#
-#
-#all: $(NAME)
-#
-#$(NAME): $(OBJS)
-#	cp $(LIBFT) $(NAME)
-#	$(AR) $(NAME) $(OBJS)
-#	@echo "$(GREEN)$(BOLD)LIBRARY CREATED: $(NAME)$(COLOR_END)"
-#
-#libft:
-#	make --no-print-directory -C $(LIBFT_DIR)
-#
-#$(OBJS_DIR)%.o:%.c | $(OBJS_DIR) $(DEPS_DIR) $(INCS)
-#	$(CC) $(CFLAGS) $(INCS) $(CPPFFLAGS) $(DEPS_DIR)$*.d -c $< -o $@ 
-#
-#$(OBJS_DIR) $(DEPS_DIR):
-#	mkdir -p $@
-#
-#clean:
-#	$(RM) $(OBJS_DIR) $(DEPS_DIR) .bonus
-#	make -C $(LIBFT_DIR)
-#	@echo "$(RED)$(BOLD)CLEANED OBJECTS$(COLOR_END)"
-#
-#fclean: clean
-#	$(RM) $(NAME) $(OBJS_DIR)
-#	make -C $(LIBFT_DIR)
-#	@echo "$(RED)$(BOLD)EVERYTHING CLEANED$(COLOR_END)"
-#
-#bonus: $(NAME) $(OBJSB) .bonus
-#	
-#.bonus: $(OBJSB)
-#	@touch .bonus
-#	$(AR) $(NAME) $(OBJSB)
-#	@echo "$(BLUE)$(BOLD)BONUS ADDED$(COLOR_END)"
-#
-#re: fclean all 
-#
-#-include $(DEPS)
-#
-#.PHONY: all clean fclean re bonus libft
-#
-#
-#
+-include $(DEPS)
