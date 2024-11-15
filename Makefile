@@ -18,7 +18,7 @@ INCS := -I . -I $(LIBFT_DIR)
 
 SRCS := $(shell find srcs -name "*.c")
 
-OBJS := $(SRCS:$(SRCS_DIR)%.c=$(OBJS_DIR)%.o)
+OBJS := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 DEPS := $(SRCS:$(SRC_DIR)%.c=$(DEP_DIR)%.d)
 
 BONUS_SRCS :=
