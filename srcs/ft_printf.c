@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:00:00 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/14 21:35:27 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/16 13:27:13 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	params;
-	int	count;
+	int		count;
 
 	count = 0;
 	va_start(params, format);
@@ -41,18 +41,23 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int	ft_putstr(const char *str)
+int	ft_putstr(char *str)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	int		count;
 
 	count = 0;
 	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while (str[i])
 	{
 		ft_putchar(str[i]);
 		++count;
-		i++;
+		++i;
 	}
 	return (count);
 }

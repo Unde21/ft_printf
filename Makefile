@@ -39,7 +39,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
 	@cp $(LIBFT) $(NAME)
-	@$(AR) $(NAME) $(OBJS)
+	$(AR) $(NAME) $(OBJS)
 	@echo "$(GREEN)$(BOLD)$(NAME) created successfully!$(END)"
 
 
