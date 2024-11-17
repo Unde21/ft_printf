@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversions_format.c                               :+:      :+:    :+:   */
+/*   ft_print_format.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:40:38 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/16 13:35:20 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/17 18:33:13 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,53 +16,68 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int	ft_putnbr_base(int nb, int check, int count)
+int	print_str(char *str)
+{
+	size_t	i;
+	int		count;
+
+	count = 0;
+	i = 0;
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	while (str[i])
+	{
+		count += print_char(str[i]);
+		++i;
+	}
+	return (count);
+}
+
+int	print_char(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	print_nbr(int nb, int check_form, int count)
 {
 	long	n;
-	
-	if (check == 0)
+
+	if (check_form == 0)
 		n = (long)nb;
 	else
 		n = (unsigned int)nb;
 	if (n < 0)
 	{
-		ft_putchar('-');
+		print_char('-');
 		n = -n;
 		++count;
 	}
 	if (n >= 10)
-		count = ft_putnbr_base(n / 10, check, count);
-	count += ft_putchar(n % 10 + '0');
+		count = print_nbr(n / 10, check_form, count);
+	count += print_char(n % 10 + '0');
 	return (count);
 }
 
-int	ft_puthexa(unsigned int n, int check_base, int count)
+int	print_hexa(unsigned int n, const char *base, int count)
 {
-	char	*base;
-
-	base = "0123456789ABCDEF";
-	if (n < 0)
-	{
-		ft_putchar('-');
-		n = -n;
-		++count;
-	}
 	if (n >= 16)
-		count = ft_puthexa(n / 16, check_base, count);
-	if (check_base == 0 && base[n % 16] >= 'A' && base[n % 16] <= 'F')
-		count += ft_putchar(base[(n % 16)] + 32);
-	else
-		count += ft_putchar(base[(n % 16)]);
+		count = print_hexa(n / 16, base, count);
+	count += print_char(base[(n % 16)]);
 	return (count);
 }
-int	ft_putaddr(long n, int count, int index)
+
+int	print_addr(unsigned long ptr, int count, int index)
 {
 	char	*base;
 
-	if (n == 0)
+	if (ptr == 0)
 	{
 		write(1, "(nil)", 5);
-		return (5);
+		return (3);
 	}
 	if (index == 0)
 	{
@@ -70,14 +85,8 @@ int	ft_putaddr(long n, int count, int index)
 		++index;
 	}
 	base = "0123456789abcdef";
-	if (n < 0)
-	{
-		ft_putchar('-');
-		n = -n;
-		++count;
-	}
-	if (n >= 16)
-		count = ft_putaddr(n / 16, count, index);
-	count += ft_putchar(base[(n % 16)]);
+	if (ptr >= 16)
+		count = print_addr(ptr / 16, count, index);
+	count += print_char(base[(ptr % 16)]);
 	return (count);
 }

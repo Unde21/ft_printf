@@ -1,10 +1,8 @@
-# Nom du projet
 NAME = libftprintf.a
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
 CPPFFLAGS := -MD -MP -MF
-DEBUGFLAGS := -fsanitize=address -g3
 
 RM := rm -rf
 AR := ar -rcs
@@ -33,7 +31,7 @@ BLUE := \033[0;34m
 END := \033[0m
 
 
-.PHONY: all clean fclean re bonus debug libft
+.PHONY: all clean fclean re bonus libft
 
 all: $(NAME)
 
@@ -52,9 +50,6 @@ $(OBJ_DIR) $(DEP_DIR):
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
-
-debug: CFLAGS += $(DEBUGFLAGS)
-debug: re
 
 bonus: SRCS += $(BONUS_SRCS)
 bonus: all
