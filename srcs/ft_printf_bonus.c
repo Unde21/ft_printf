@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/19 04:36:51 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/19 15:01:54 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	params;
-	t_list	flags;
+	t_flags	flags;
 
-	reset_struct_false();
+	reset_struct_false(flags);
 	va_start(params, format);
+	flags.count = 0;
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -30,10 +31,10 @@ int	ft_printf(const char *format, ...)
 			if (*format + 1)
 			{
 				++format;
-				if (check_flags(&format))
-					format += check_flags_format(&params, format);
-				else if (format)
-					flags.count += check_format(&params, *format);
+				if (parse_flags((char *)format))
+					format += check_flg_format(&params, (char *)format, flags);
+				else
+					flags.count += check_format(&params, format);
 			}
 		}
 		else
@@ -44,29 +45,33 @@ int	ft_printf(const char *format, ...)
 	return (flags.count);
 }
 
-int	check_flags(char *format)
+int	parse_flags(char *format)
 {
-	t_list	flags;
-	
-	while (valid_format(&format) == 0 && *format != NULL)
+	t_flags	flags;
+
+	while (valid_format(*format) == 0 && *format != '\0')
 	{
-		change_struct_flags(&format);
-		if (format > '0' && format <= '9')
+		change_struct_flags(*format);
+		if (*format > '0' && *format <= '9')
 		{
 			if (flags.arg1 == -1)
-				flags.arg1 = ft_atoi(&format);
+				flags.arg1 = ft_atoi(format);
 			else
-				flags.arg2 = ft_atoi(&format);
+				flags.arg2 = ft_atoi(format);
+			while (*format > '0' && *format <= '9')
+				++format;
+			continue ;
 		}
 		++format;
 	}
-	if (flags.nb != 0)
-		return (1);
-	return (0);
+	if (flags.nb == 0)
+		return (0);
+	return (1);
 }
-void	change_struct_flags(char *format)
+
+void	change_struct_flags(char format)
 {
-	t_list	flags;
+	t_flags	flags;
 
 	if (format == '#')
 		flags.sharp = true;
@@ -78,15 +83,14 @@ void	change_struct_flags(char *format)
 		flags.space = true;
 	else if (format == '.')
 		flags.point = true;
-	else if (format == '0')
+	else if (format == '0' && flags.arg1 == -1)
 		flags.zero = true;
 	else
 		++flags.nb;
 }
-void	reset_struct_false(void)
-{
-	t_list	flags;
 
+void	reset_struct_false(t_flags *flags)
+{
 	flags.sharp = false;
 	flags.add = false;
 	flags.less = false;
@@ -97,6 +101,7 @@ void	reset_struct_false(void)
 	flags.arg1 = -1;
 	flags.arg2 = -1;
 }
+
 int	check_format(va_list *params, char format)
 {
 	int		count;
