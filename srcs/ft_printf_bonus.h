@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 04:29:24 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 15:21:20 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct s_flags
 	int		arg2;
 	char	*base_to;
 }		t_flags;
+
+
 
 void	change_struct_flags(char format, t_flags *flags);
 int		buffersize_hex(unsigned int n, t_flags *flags);

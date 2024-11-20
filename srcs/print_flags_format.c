@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 08:12:13 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 16:22:58 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,20 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	if (n == 0 && flags->point && flags->arg2 == 0)
 		return (0);
 	final_size = count_hex_digits(n);
-		printf("1flags arg1 : %d, arg2 : %d, count : %d\n", flags->arg1, flags->arg2, final_size);
+	//	printf("1flags arg1 : %d, arg2 : %d, count : %d\n", flags->arg1, flags->arg2, final_size);
 	final_size = handle_point(final_size, flags);
-		printf("2flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
+	//	printf("2flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
 	final_size = handle_sharp(final_size, n, flags);
-		printf("3flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
+	//	printf("3flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
 	final_size = size_field(final_size, flags);
-		printf("4flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
+	//	printf("4flags arg1 : %d, arg2 : %d, final_size : %d\n", flags->arg1, flags->arg2, final_size);
 	if (arg_is_valid == -1 && flags->point && flags->sharp)
 	{
-		final_size += 2;
+		final_size += 2 ;
 		flags->arg2 -= 2;
 	}
+	if (final_size <= flags->arg2 + count_hex_digits(n) && flags->sharp)
+		final_size += count_hex_digits(n) - 1;
 	return (final_size);
 }
 // modifie fonctionnement les flags pas compris dans le itoa faire le calcul sans
@@ -79,12 +81,12 @@ void	convert_hex(t_flags *flags, unsigned int n, size_t len)
 {
 	char *buffer;
 	
-	buffer = calloc(sizeof(char), (len));
+	buffer = calloc(sizeof(char), (len + 1));
 	if (!buffer)
 		return ;
-	printf("SIZE OF BUFFER %zu", len);
-	buffer = ft_itoa_base(n, flags, len - 1, buffer);
-	filling_buffer(flags, buffer, len - 1, n);
+	//printf("SIZE OF BUFFER %zu", len);
+	buffer = ft_itoa_base(n, flags, len, buffer);
+	filling_buffer(flags, buffer, len, n);
 	if (flags->less)
 		rev_space_and_num(buffer);
 	flags->count += print_str(buffer);
@@ -94,32 +96,27 @@ void	convert_hex(t_flags *flags, unsigned int n, size_t len)
 	// 	printf("buffer[%zu] = '%c'\n", i, buffer[i]);
 	// 	++i;
 	// }
-	// free(buffer);
+	free(buffer);
 }
 void	filling_buffer(t_flags *flags, char *s, size_t len, unsigned int n)
 {
 	size_t	i;
 	
-	len -= count_hex_digits(n);       // ici - 1 ou + 1
-	int len_n = count_hex_digits(n);
-	printf("\n\n\niciflags arg1 : %d, arg2 : %d, final_size : %zu\n", flags->arg1, flags->arg2, len);
-	printf("len : %zu", len);
-	if (flags->point && flags->arg2 > len_n)
+	len -= count_hex_digits(n);
+	//int len_n = count_hex_digits(n);
+	//printf("\n\n\niciflags arg1 : %d, arg2 : %d, final_size : %zu\n", flags->arg1, flags->arg2, len);
+	//printf("len : %zu", len);
+	if (flags->point)
 	{
-		int test_l = 1 + flags->arg2 - len_n;
-		while (test_l-- >= 0)
+		//int test_l = flags->arg2;
+		while (flags->arg2 > 0)
 		{
-			s[len--] = '0';
+			s[len] = '0';
+			len--;
+			flags->arg2--;
 		}
 	}
-	// if (flags->sharp && flags->point)
-	// {
-	// 	s[len] = '0';
-	// 	--len;
-	// 	s[len] = '0';
-	// 	--len;
-	// }
-	if (flags->sharp && n != 0 && len >= 1)
+	if (flags->sharp && n != 0 && len >= 1 && !flags->zero)
 	{
 		//printf("len : %zu", len);
 		if (ft_strncmp(flags->base_to, LOWER_BASE, 16) == 0)
@@ -129,14 +126,25 @@ void	filling_buffer(t_flags *flags, char *s, size_t len, unsigned int n)
 		//printf("len : %zu", len);
 		--len;
 		s[len] = '0';
-		printf("len : %zu", len);
+		//printf("len : %zu", len);
 	}
+	// if (flags->zero && flags->point)
+	// {
+	// 	--len;
+	// 	if (ft_strncmp(flags->base_to, LOWER_BASE, 16) == 0)
+	// 		s[0] = 'x';
+	// 	else
+	// 		s[1] = 'X';
+	// 	//printf("len : %zu", len);
+	// 	--len;
+	// 	s[len] = '0';
+	// }
 	if (flags->zero && !flags->less && !flags->point)
 	{
-		while (flags->arg1 >= 0)
+		while (flags->arg1 > 0)
 		{
-			if (flags->sharp && len == 2)
-				break;
+		 	if (flags->sharp && len == 1)
+		 		break;
 			s[len] = '0';
 			--len;
 			--flags->arg1;
@@ -149,13 +157,13 @@ void	filling_buffer(t_flags *flags, char *s, size_t len, unsigned int n)
 				s[len] = 'X';
 			--len;
 			s[len] = '0';
-			printf("len : %zu", len);
+			//printf("ayalen : %zu", len);
 		}
 	}
 	i = 0;
 	while (flags->arg1 > 0 && i <= len)
 	{
-		if (s[i] != '0' && s[i] != 'x')
+		if (s[i] != '0')
 			s[i++] = ' ';
 		--flags->arg1;		
 	}

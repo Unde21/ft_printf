@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/20 08:01:40 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 16:20:08 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int	main()
 {
 	//char s[] = "hello world";
-	ft_printf("%#012.12x", 255);      //2eme nombre 12 et + sa foire 
-	printf("\n%#012.12x", 255);   
+	ft_printf("%#.14x", 25577);    
+	printf("\n%#.14x", 25577);   
 	//printf("\n% 10d", 25);
 }
 
@@ -33,4 +33,4 @@ int	main()
 	'.' flags : %10.0d, 42 -> 8 espaces puis 42 , %10.10, 42 ->, 8 '0' 42  %12.10, 42 -> 2 espaces && 8 '0' 42 compatible avec : '+, #, 0' '#' doit etre devant '.'  
 
 	 ' ' - #/+ 0 .
-*/
+*/ 
