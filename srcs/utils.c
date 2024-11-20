@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:36:14 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/19 04:36:16 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 04:28:50 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <limits.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include "../libft/libft.h"
 
 static int	is_overflow(unsigned long n, const char *str, size_t i, int s);
 
@@ -56,4 +59,80 @@ static int	is_overflow(unsigned long n, const char *str, size_t i, int s)
 	else if ((long)n * 10 > LONG_MAX - (str[i] - '0'))
 		return (0);
 	return (1);
+}
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s1[i] == s2[i] && i < n - 1)
+		++i;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	uint8_t	*str;
+	size_t	i;
+
+	i = 0;
+	str = (uint8_t *)s;
+	while (n > 0)
+	{
+		str[i] = c;
+		--n;
+		++i;
+	}
+	return (s);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*str;
+
+	str = (unsigned char *)s;
+	ft_memset(str, '\0', n);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*calloc;
+	size_t	total_size;
+
+	if (!nmemb || !size)
+		total_size = 0;
+	else
+	{
+		if (nmemb > SIZE_MAX / size)
+			return (NULL);
+		total_size = size * nmemb;
+	}
+	calloc = malloc(total_size);
+	if (!calloc)
+		return (NULL);
+	ft_bzero(calloc, total_size);
+	return (calloc);
+}
+
+void	rev_space_and_num(char *str)
+{
+	size_t	i;
+	char	swap;
+	size_t	j;
+
+	swap = '0';
+	i = 0;
+	j = 0;
+	while (str[j] == ' ')
+		j++;
+	while (str[j] && str[i] == ' ')
+	{
+		swap = str[i];
+		str[i] = str[j];
+		str[j] = swap;
+		++i;
+		++j;
+	}
 }

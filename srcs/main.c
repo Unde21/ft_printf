@@ -6,22 +6,21 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/19 13:13:23 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 07:51:04 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
 int	main()
 {
 	//char s[] = "hello world";
-	printf("%#6.3x", 25);
+	ft_printf("%#013.12x", 255);      2eme nombre 12 et + sa foire 
+	printf("\n%#013.12x", 255);   
 	//printf("\n% 10d", 25);
 }
-
-
 
 
 /*

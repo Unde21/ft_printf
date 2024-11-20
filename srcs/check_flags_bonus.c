@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/19 15:02:09 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 06:24:21 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 {
 	int		pos_next;
 
-	pos_next = pos_next_format(params, format);
+	pos_next = pos_next_format(format);
+	// printf("\npos next: %d\n", pos_next);
+	// printf("format[pos_next] : %s\n", format + pos_next);
 	if (*(format + pos_next) == 'x')
-		print_x(params, *(format + pos_next), flags);
+		print_x(params, flags);
 	// if (*(format + pos_next) == 'X')
 	// 	print_X(params, *(format + pos_next));
 	// if (*(format + pos_next) == 'd' || *(format + pos_next) == 'i')
@@ -35,15 +37,15 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	// 	print_s(params, *(format + pos_next));
 	// if (*(format + pos_next) == 'c')
 	// 	print_c(params, *(format + pos_next));
-	// return (pos_next + 1);
+	return (pos_next + 1);
 }
 
-int	pos_next_format(va_list *params, char *format)
+int	pos_next_format(char *format)
 {
 	int	pos;
 
 	pos = 0;
-	while (format[pos] != '\0' && valid_format(format[pos]))
+	while (format[pos] != '\0' && !valid_format(format[pos]))
 		++pos;
 	return (pos);
 }
