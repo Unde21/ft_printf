@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 07:49:28 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 08:12:13 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	}
 	return (final_size);
 }
-
+// modifie fonctionnement les flags pas compris dans le itoa faire le calcul sans
 int	count_hex_digits(unsigned int n)
 {
 	int	count;

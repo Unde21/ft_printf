@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:41:24 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/20 06:50:18 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 08:02:10 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	size_field(int count, t_flags *flags)
 		//printf("3flags arg1 : %d, arg2 : %d, count : %d\n", flags->arg1, flags->arg2, count);
 		//flags->arg1 -= (flags->arg2 + count);
 		if (flags->arg2 <= 0 && flags->point)
-		{
 			flags->arg2 = flags->arg1;
-		}
 		printf("6flags arg1 : %d, arg2 : %d, count : %d\n", flags->arg1, flags->arg2, count);
 		return (flags->arg1);
 	}

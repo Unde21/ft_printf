@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/20 07:51:04 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 08:01:40 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 int	main()
 {
 	//char s[] = "hello world";
-	ft_printf("%#013.12x", 255);      2eme nombre 12 et + sa foire 
-	printf("\n%#013.12x", 255);   
+	ft_printf("%#012.12x", 255);      //2eme nombre 12 et + sa foire 
+	printf("\n%#012.12x", 255);   
 	//printf("\n% 10d", 25);
 }
 
