@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 15:21:20 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 02:05:21 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,31 @@ typedef struct s_flags
 	bool	zero;
 	bool	add;
 	bool	less;
-	bool	sharp;
+	bool	prefix;
 	bool	point;
 	size_t	nb;
 	int		count;
-	int		arg1;
-	int		arg2;
+	int		padding;
+	int		precision;
+	int		size_precision;
+	int		size_padding;
 	char	*base_to;
 }		t_flags;
 
 
+int		adding_prefix(t_flags *flags, char *s, int len);
+int		adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n);
+void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n);
+void	print_X(va_list *params, t_flags *flags);
+void	print_x(va_list *params, t_flags *flags);
+char	*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s);
+int		buffersize_hex(unsigned int n, t_flags *flags);
+void	convert_hex(t_flags *flags, unsigned int n, int len);
 
 void	change_struct_flags(char format, t_flags *flags);
-int		buffersize_hex(unsigned int n, t_flags *flags);
-void	convert_hex(t_flags *flags, unsigned int n, size_t len);
-char	*ft_itoa_base(unsigned int n, t_flags *flags, size_t len, char *s);
-int		parse_format(va_list params, char *format, t_flags *flags);
+int		parse_format(va_list *params, char *format, t_flags *flags);
 int		parse_flags(char *format, t_flags *flags);
 void	reset_struct(t_flags *flags);
-void	print_x(va_list *params, t_flags *flags);
 int		check_flg_format(va_list *params, char *format, t_flags *flags);
-int		handle_point(int count, t_flags *flags);
-int		handle_sharp(int count, unsigned int n, t_flags *flags);
-int		size_field(int count, t_flags *flags);
-void	filling_buffer(t_flags *flags, char *s, size_t len, unsigned int n);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 06:24:21 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 02:00:47 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	int		pos_next;
 
 	pos_next = pos_next_format(format);
-	// printf("\npos next: %d\n", pos_next);
-	// printf("format[pos_next] : %s\n", format + pos_next);
 	if (*(format + pos_next) == 'x')
 		print_x(params, flags);
-	// if (*(format + pos_next) == 'X')
-	// 	print_X(params, *(format + pos_next));
+	if (*(format + pos_next) == 'X')
+		print_X(params, flags);
 	// if (*(format + pos_next) == 'd' || *(format + pos_next) == 'i')
 	// 	print_nb(params, *(format + pos_next));
 	// if (*(format + pos_next) == 'u')
@@ -37,7 +35,7 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	// 	print_s(params, *(format + pos_next));
 	// if (*(format + pos_next) == 'c')
 	// 	print_c(params, *(format + pos_next));
-	return (pos_next + 1);
+	return (pos_next);
 }
 
 int	pos_next_format(char *format)

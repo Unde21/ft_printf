@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_format_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:09 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 01:37:38 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/20 23:04:42 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

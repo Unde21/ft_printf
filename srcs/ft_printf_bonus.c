@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 06:24:49 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 00:14:17 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	ft_printf(const char *format, ...)
 	if (!flags)
 		return (0);
 	reset_struct(flags);
-	count = parse_format(params, (char *)format, flags);
+	count = parse_format(&params, (char *)format, flags);
 	va_end(params);
 	return (count);
 }
 
-int	parse_format(va_list params, char *format, t_flags *flags)
+int	parse_format(va_list *params, char *format, t_flags *flags)
 {
 	while (*format != '\0')
 	{
@@ -44,10 +44,9 @@ int	parse_format(va_list params, char *format, t_flags *flags)
 			{
 				++format;
 				if (parse_flags(format, flags))
-					format += check_flg_format(&params, format, flags);
+					format += check_flg_format(params, format, flags);
 				else
-					flags->count += check_format(&params, *format);
-				return (flags->count);
+					flags->count += check_format(params, *format);
 			}
 		}
 		else
@@ -65,10 +64,10 @@ int	parse_flags(char *format, t_flags *flags)
 		change_struct_flags(*format, flags);
 		if (*format > '0' && *format <= '9')
 		{
-			if (flags->arg1 == -1)
-				flags->arg1 = ft_atoi(format);
+			if (flags->padding == -1)
+				flags->padding = ft_atoi(format);
 			else
-				flags->arg2 = ft_atoi(format);
+				flags->precision = ft_atoi(format);
 			while (*format > '0' && *format <= '9')
 				++format;
 			continue ;
@@ -83,7 +82,7 @@ int	parse_flags(char *format, t_flags *flags)
 void	change_struct_flags(char format, t_flags *flags)
 {
 	if (format == '#')
-		flags->sharp = true;
+		flags->prefix = true;
 	if (format == '+')
 		flags->add = true;
 	if (format == '-')
@@ -92,7 +91,7 @@ void	change_struct_flags(char format, t_flags *flags)
 		flags->space = true;
 	if (format == '.')
 		flags->point = true;
-	if (format == '0' && flags->arg1 == -1)
+	if (format == '0' && flags->padding == -1)
 		flags->zero = true;
 	else
 		++flags->nb;
@@ -100,15 +99,17 @@ void	change_struct_flags(char format, t_flags *flags)
 
 void	reset_struct(t_flags *flags)
 {
-	flags->sharp = false;
+	flags->prefix = false;
 	flags->add = false;
 	flags->less = false;
 	flags->space = false;
 	flags->point = false;
 	flags->zero = false;
 	flags->nb = 0;
-	flags->arg1 = -1;
-	flags->arg2 = -1;
+	flags->padding = -1;
+	flags->precision = -1;
+	flags->size_precision = 0;
+	flags->size_padding = 0;
 }
 
 int	check_format(va_list *params, char format)

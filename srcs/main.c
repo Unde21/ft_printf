@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/20 16:20:08 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 02:27:59 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 int	main()
 {
 	//char s[] = "hello world";
-	ft_printf("%#.14x", 25577);    
-	printf("\n%#.14x", 25577);   
+	ft_printf("%#15x", 25545);
+	ft_printf("\n");    
+	printf("%#15x", 25545);
 	//printf("\n% 10d", 25);
 }
 
@@ -34,3 +35,4 @@ int	main()
 
 	 ' ' - #/+ 0 .
 */ 
+// c = number et '-'
