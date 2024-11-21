@@ -6,11 +6,11 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 05:25:32 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:21:37 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
 int	count_hex_digits(unsigned int n)
 {
@@ -56,7 +56,7 @@ void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 	}
 	if (flags->prefix && n != 0 && len >= 1 && !flags->zero)
 		len = adding_prefix(flags, s, len);
-	if (flags->zero && flags->point)
+	if (flags->zero && flags->point && flags->prefix)
 	{
 		len = adding_prefix(flags, s, len);
 	}
@@ -65,7 +65,7 @@ void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 
 int	adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
 {
-	int	i;
+	size_t	i;
 
 	if (flags->zero && !flags->less && !flags->point)
 	{

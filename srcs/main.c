@@ -6,20 +6,20 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/21 05:34:23 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 00:04:16 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 int	main(void)
 {
 	// char s[] = "hello world";
-	//ft_printf("%35s", "Hello world");
-	//ft_printf("\n");
-	printf("'%15.0s'", "Hello world");
+	ft_printf("'%-50.2s'", "bonjour");
+	ft_printf("\n");
+	printf("'%-50.2s'", "bonjour");
 	// printf("\n% 10d", 25);
 }
 
@@ -45,3 +45,8 @@ int	main(void)
 // c = number et '-'
 // p = number et '-'
 // s = number et '-'  et '.'
+
+
+// gerer le parsing ex : sur 'x' ft_printf("%010 x", 255); / Ordre des flags a parser
+// ajouter un call fonction a l entree de check_flg_format pour gerer les cas impossible et juste print
+// gerer le % seul pour return -1 (start count a - 1)

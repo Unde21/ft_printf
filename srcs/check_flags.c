@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_flags_bonus.c                                :+:      :+:    :+:   */
+/*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 04:49:36 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:35:58 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <unistd.h>
@@ -31,8 +30,8 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	// 	print_unsigned_nb(params, *(format + pos_next));
 	if (*(format + pos_next) == 'p')
 		print_p(params, flags);
-	// if (*(format + pos_next) == 's')
-	// 	print_s(params, *(format + pos_next));
+	if (*(format + pos_next) == 's')
+		print_s(params, flags);
 	if (*(format + pos_next) == 'c')
 		print_c(params, flags);
 	return (pos_next);

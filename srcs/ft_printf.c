@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 02:56:57 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 22:19:06 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -28,9 +27,11 @@ int	ft_printf(const char *format, ...)
 	flags = malloc(sizeof(t_flags));
 	if (!flags)
 		return (0);
+	flags->count = 0;
 	reset_struct(flags);
 	count = parse_format(&params, (char *)format, flags);
 	va_end(params);
+	free(flags);
 	return (count);
 }
 
@@ -53,7 +54,6 @@ int	parse_format(va_list *params, char *format, t_flags *flags)
 			flags->count += print_char(*format);
 		++format;
 	}
-	free(flags);
 	return (flags->count);
 }
 

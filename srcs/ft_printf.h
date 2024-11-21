@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 04:49:23 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:33:23 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdbool.h>
 # include <stddef.h>
 
-
+# include "../libft/libft.h"
 #include <stdio.h>
 
 # define LOWER_BASE "0123456789abcdef"
@@ -25,6 +25,7 @@
 
 // function libft 
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 int		ft_printf(const char *format, ...);
 int		print_char(int c);
@@ -38,7 +39,7 @@ int		check_format(va_list *params, char format);
 int		count_hex_digits(unsigned int n);
 int		pos_next_format(char *format);
 
-void	rev_space_and_num(char *str);
+void	rev_space_and_char(char *str);
 typedef struct s_flags
 {
 	bool	space;
@@ -76,6 +77,11 @@ void	print_p(va_list *params, t_flags *flags);
 int		buffersize_addr(unsigned long n, t_flags *flags);
 void	convert_addr(t_flags *flags, unsigned long n, int len);
 char	*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n);
+
+// format 's'
+char	*manage_flags_s(t_flags *flags, char *s, char *str);
+int		buffersize_s(char *str, t_flags *flags);
+void	print_s(va_list *params, t_flags *flags);
 
 void	change_struct_flags(char format, t_flags *flags);
 int		parse_format(va_list *params, char *format, t_flags *flags);

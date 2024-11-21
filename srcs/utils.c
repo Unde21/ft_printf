@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:36:14 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/20 04:28:50 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:33:43 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,33 @@ void	ft_bzero(void *s, size_t n)
 	ft_memset(str, '\0', n);
 }
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size <= 0)
+		return (ft_strlen(src));
+	while (src[i] && i < size - 1)
+	{
+		dst[i] = src[i];
+		++i;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
+}
+
+
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	char	*calloc;
@@ -116,7 +143,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (calloc);
 }
 
-void	rev_space_and_num(char *str)
+void	rev_space_and_char(char *str)
 {
 	size_t	i;
 	char	swap;

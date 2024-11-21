@@ -6,12 +6,11 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:49:05 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 02:54:39 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 22:26:45 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -48,7 +47,7 @@ char	*manage_flags_c(t_flags *flags, char *s, int len, int c)
 	int	len_tmp;
 
 	len_tmp = len;
-	s[len] = c;
+	s[len] = c + '0';
 	--len;
 	while (flags->size_padding > 0)
 	{

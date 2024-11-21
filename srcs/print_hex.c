@@ -6,12 +6,11 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 05:26:57 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:27:05 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
 #include <stdlib.h>
@@ -71,7 +70,7 @@ void	convert_hex(t_flags *flags, unsigned int n, int len)
 	buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);
 	adding_all_flag_buffer(flags, buffer, len - 1, n);
 	if (flags->less)
-		rev_space_and_num(buffer);
+		rev_space_and_char(buffer);
 	flags->count += write(1, buffer, len);
 	free(buffer);
 }

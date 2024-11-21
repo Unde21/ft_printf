@@ -6,11 +6,11 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:59:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 05:29:14 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 23:27:20 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -63,6 +63,6 @@ char	*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n)
 		--flags->size_padding;
 	}
 	if (flags->less && flags->padding > 0)
-		rev_space_and_num(s);
+		rev_space_and_char(s);
 	return (s);
 }
