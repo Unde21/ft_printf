@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 01:57:42 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 05:26:57 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	if (flags->prefix && n != 0)
 		buffer_size += 2;
 	if (flags->padding > buffer_size + flags->size_precision)
-		flags->size_padding = flags->padding - (buffer_size + flags->size_precision);
+		flags->size_padding = flags->padding - (buffer_size
+				+ flags->size_precision);
 	buffer_size += flags->size_precision + flags->size_padding;
 	return (buffer_size);
 }
@@ -64,7 +65,7 @@ void	convert_hex(t_flags *flags, unsigned int n, int len)
 {
 	char	*buffer;
 
-	buffer = calloc(sizeof(char), (len + 1));
+	buffer = calloc(sizeof(char), len + 1);
 	if (!buffer)
 		return ;
 	buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);

@@ -6,22 +6,22 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 00:14:17 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 02:56:57 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
 #include "ft_printf_bonus.h"
 #include <stdarg.h>
-#include <stdlib.h>
 #include <stddef.h>
+#include <stdlib.h>
 #include <unistd.h>
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	params;
 	t_flags	*flags;
-	int	count;
+	int		count;
 
 	count = 0;
 	va_start(params, format);
@@ -110,32 +110,4 @@ void	reset_struct(t_flags *flags)
 	flags->precision = -1;
 	flags->size_precision = 0;
 	flags->size_padding = 0;
-}
-
-int	check_format(va_list *params, char format)
-{
-	int		count;
-	char	*upper_base;
-	char	*lower_base;
-
-	upper_base = "0123456789ABCDEF";
-	lower_base = "0123456789abcdef";
-	count = 0;
-	if (format == 'd' || format == 'i')
-		count += print_nbr(va_arg(*params, int), 0, count);
-	else if (format == 'c')
-		count += print_char(va_arg(*params, int));
-	else if (format == 's')
-		count += print_str(va_arg(*params, char *));
-	else if (format == 'p')
-		count += print_addr(va_arg(*params, unsigned long), 0, 0);
-	else if (format == 'u')
-		count += print_nbr(va_arg(*params, unsigned int), 1, count);
-	else if (format == 'x')
-		count += print_hexa(va_arg(*params, unsigned int), lower_base, count);
-	else if (format == 'X')
-		count += print_hexa(va_arg(*params, unsigned int), upper_base, count);
-	else if (format == '%')
-		count += print_char('%');
-	return (count);
 }

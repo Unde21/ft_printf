@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 02:27:29 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/21 05:25:32 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ char	*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s)
 	while (n > 0)
 	{
 		s[len--] = base_to[n % 16];
-		n  /= 16;
+		n /= 16;
 	}
 	return (s);
 }
 void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
-{	
+{
 	len -= count_hex_digits(n);
 	if (flags->point)
 	{
@@ -61,19 +61,18 @@ void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 		len = adding_prefix(flags, s, len);
 	}
 	len = adding_precision_buffer(flags, s, len, n);
-
 }
 
-int		adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
+int	adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
 {
-	int i;
-	
+	int	i;
+
 	if (flags->zero && !flags->less && !flags->point)
 	{
 		while (flags->size_padding > 0)
 		{
-		 	if (flags->prefix && len == 1)
-		 		break;
+			if (flags->prefix && len == 1)
+				break ;
 			s[len] = '0';
 			--len;
 			--flags->size_padding;
@@ -86,7 +85,7 @@ int		adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
 	{
 		if (s[i] != '0')
 			s[i++] = ' ';
-		--flags->size_padding;		
+		--flags->size_padding;
 	}
 	return (len);
 }
