@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:09 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 22:01:19 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 04:34:41 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	print_str(char *str)
 		write(1, "(null)", 6);
 		return (6);
 	}
+	write(1, str, ft_strlen(str));
 	while (str[i])
 	{
 		count += print_char(str[i]);
@@ -84,7 +85,7 @@ int	print_addr(unsigned long ptr, int count, int index)
 		count += write(1, "0x", 2);
 		++index;
 	}
-	base = "0123456789abcdef";
+	base = LOWER_BASE;
 	if (ptr >= 16)
 		count = print_addr(ptr / 16, count, index);
 	count += print_char(base[(ptr % 16)]);

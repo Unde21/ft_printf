@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 22:19:06 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 04:37:55 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,10 @@ int	parse_format(va_list *params, char *format, t_flags *flags)
 			{
 				++format;
 				if (parse_flags(format, flags))
+				{
 					format += check_flg_format(params, format, flags);
+					reset_struct(flags);
+				}
 				else
 					flags->count += check_format(params, *format);
 			}
@@ -84,7 +87,7 @@ void	change_struct_flags(char format, t_flags *flags)
 	if (format == '#')
 		flags->prefix = true;
 	if (format == '+')
-		flags->add = true;
+		flags->sign = true;
 	if (format == '-')
 		flags->less = true;
 	if (format == ' ')
@@ -100,7 +103,7 @@ void	change_struct_flags(char format, t_flags *flags)
 void	reset_struct(t_flags *flags)
 {
 	flags->prefix = false;
-	flags->add = false;
+	flags->sign = false;
 	flags->less = false;
 	flags->space = false;
 	flags->point = false;

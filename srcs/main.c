@@ -6,25 +6,27 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/22 00:04:16 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 05:12:27 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 int	main(void)
 {
+	//int a = 0;
 	// char s[] = "hello world";
-	ft_printf("'%-50.2s'", "bonjour");
+	ft_printf("'% 4d", 3554654);  // test avec 0
 	ft_printf("\n");
-	printf("'%-50.2s'", "bonjour");
+	printf("'% 4d", 3545554);
 	// printf("\n% 10d", 25);
 }
 
 /*
-	# flags : add "0x" for %x and "0X" for %X (non compatible avec : '+')
+	# flags : sign "0x" for %x and "0X" for %X (non compatible avec : '+')
 	0 flags : valeur complete a gauche par des 0, si '0' && '+'
 		-> '0' ignored si une precision est donne avec un chiffre '0' est ignore
 	- flags : ajuste a gauche par des espaces, (nb precise) "%-10d", 42
@@ -47,6 +49,13 @@ int	main(void)
 // s = number et '-'  et '.'
 
 
+// u = number et '.' '-' '0'
+// d et i = '0' '-' '+' ' ' '.'
+
+
 // gerer le parsing ex : sur 'x' ft_printf("%010 x", 255); / Ordre des flags a parser
 // ajouter un call fonction a l entree de check_flg_format pour gerer les cas impossible et juste print
+// aller voir les atribute pour gerer les error 
 // gerer le % seul pour return -1 (start count a - 1)
+// verifier les types dans count_hex_digits ->addr
+// voir si il faut bouger la fonction adding_prefix 

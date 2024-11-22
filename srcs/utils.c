@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:36:14 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 23:33:43 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 04:18:12 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include "ft_printf.h"
 #include "../libft/libft.h"
 
 static int	is_overflow(unsigned long n, const char *str, size_t i, int s);

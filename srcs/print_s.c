@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:56:16 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 00:04:26 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 04:33:37 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_s(va_list *params, t_flags *flags)
 {
 	int		total_length;
 	char	*arg;
-	char 	*buffer;
+	char	*buffer;
 
 	arg = va_arg(*params, char *);
 	total_length = buffersize_s(arg, flags);
@@ -33,13 +33,13 @@ void	print_s(va_list *params, t_flags *flags)
 int	buffersize_s(char *str, t_flags *flags)
 {
 	int	buffer_size;
-	
+
 	buffer_size = (int)ft_strlen(str);
 	if (flags->precision == -1)
 		flags->precision = 0;
 	if (flags->padding == -1)
 		flags->padding = 0;
-	if (flags->point && flags->precision == 0 && flags->padding !=0)
+	if (flags->point && flags->precision == 0 && flags->padding != 0)
 		flags->precision = flags->padding;
 	if (flags->point && flags->precision < buffer_size)
 	{
@@ -47,7 +47,7 @@ int	buffersize_s(char *str, t_flags *flags)
 		buffer_size = flags->size_precision;
 	}
 	if (flags->padding > buffer_size)
-		flags->size_padding =  flags->padding - buffer_size;
+		flags->size_padding = flags->padding - buffer_size;
 	buffer_size += flags->size_padding;
 	return (buffer_size);
 }
@@ -56,7 +56,7 @@ char	*manage_flags_s(t_flags *flags, char *s, char *str)
 {
 	size_t	i;
 	int		len_str;
-	
+
 	len_str = (int)ft_strlen(str);
 	i = 0;
 	while (flags->size_padding > 0)
