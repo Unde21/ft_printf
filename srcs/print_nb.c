@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 05:10:13 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 05:17:42 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	buffersize_nb(int n, t_flags *flags)
 	buffer_size += flags->size_precision + flags->size_padding;
 	if (n < 0)
 		buffer_size += 1;
-	if (flags->space)
+	if (flags->space && n >= 0)
 		buffer_size += 1;
 	return (buffer_size);
 }

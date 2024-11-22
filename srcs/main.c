@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/22 05:12:27 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/22 05:18:09 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	main(void)
 {
 	//int a = 0;
 	// char s[] = "hello world";
-	ft_printf("'% 4d", 3554654);  // test avec 0
+	ft_printf("'% 4d", -3554654);  // test avec 0
 	ft_printf("\n");
-	printf("'% 4d", 3545554);
+	printf("'% 4d", -3545554);
 	// printf("\n% 10d", 25);
 }
 
