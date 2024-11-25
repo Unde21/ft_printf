@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 04:06:05 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:13:54 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,14 @@ int			buffersize_nb(int n, t_flags *flags);
 int			count_digits_nb(int n);
 void		print_nb(va_list *params, t_flags *flags);
 char		*itoa(int n, int len, char *s);
+
+/* format u */
+char	*unsigned_itoa(int n, int len, char *s);
+int	count_digits_u_nb(unsigned int n);
+int	buffersize_u_nb(unsigned int n, t_flags *flags);
+void	print_unb(va_list *params, t_flags *flags);
+char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n);
+void	adding_padding_u_nb(t_flags *flags, char *s);
 
 void		change_struct_flags(char format, t_flags *flags);
 int			parse_format(va_list *params, char *format, t_flags *flags);

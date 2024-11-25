@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 04:37:55 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:13:23 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ int	parse_flags(char *format, t_flags *flags)
 		if (*format > '0' && *format <= '9')
 		{
 			if (flags->padding == -1)
-				flags->padding = ft_atoi(format);
+				flags->padding = ft_atoi((const char *)format);
 			else
-				flags->precision = ft_atoi(format);
+				flags->precision = ft_atoi((const char *)format);
 			while (*format > '0' && *format <= '9')
 				++format;
 			continue ;

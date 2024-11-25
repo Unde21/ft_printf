@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 05:17:42 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 12:26:22 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_nb(va_list *params, t_flags *flags)
 	buffer = itoa(arg, total_length - 1, buffer);
 	buffer = manage_flags_nb(flags, buffer, total_length - 1, arg);
 	flags->count += write(1, buffer, total_length);
-	//free(buffer);
+	free(buffer);
 }
 
 int	buffersize_nb(int n, t_flags *flags)
