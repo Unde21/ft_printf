@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 02:17:11 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:37:21 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_x(va_list *params, t_flags *flags)
 	convert_hex(flags, arg, total_length);
 }
 
-void	print_X(va_list *params, t_flags *flags)
+void	print_upper_x(va_list *params, t_flags *flags)
 {
 	unsigned int	arg;
 	int				total_length;

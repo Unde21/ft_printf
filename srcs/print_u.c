@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 12:49:42 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:46:14 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_unb(va_list *params, t_flags *flags)
 	buffer = manage_flags_u_nb(flags, buffer, total_length - 1, arg);
 	if (flags->less)
 		rev_space_and_char(buffer);
-	flags->count = write(1, buffer, total_length);
+	flags->count = write(1, buffer, total_length) + 1;
 	free(buffer);
 }
 
@@ -47,8 +47,8 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	if (flags->point && flags->precision > buffer_size)
 		flags->size_precision = flags->precision - buffer_size;
 	if (flags->padding > buffer_size + flags->size_precision)
-		flags->size_padding = flags->padding - (buffer_size 
-			+ flags->size_precision);
+		flags->size_padding = flags->padding - (buffer_size
+				+ flags->size_precision);
 	buffer_size += flags->size_precision + flags->size_padding;
 	return (buffer_size);
 }
@@ -56,7 +56,7 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 int	count_digits_u_nb(unsigned int n)
 {
 	int	i;
-	
+
 	i = 0;
 	while (n != 0)
 	{

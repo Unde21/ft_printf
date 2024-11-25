@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:49:05 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/21 22:26:45 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:37:58 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	print_c(va_list *params, t_flags *flags)
 	flags->count += write(1, buffer, total_length);
 	free(buffer);
 }
+
 int	buffersize_c(t_flags *flags)
 {
 	int	buffer_size;

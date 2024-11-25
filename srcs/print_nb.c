@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 12:26:22 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:47:10 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ int	buffersize_nb(int n, t_flags *flags)
 
 int	count_digits_nb(int nb)
 {
-	int	i;
+	int		i;
 	long	n;
-	
+
 	n = (long)nb;
 	i = 0;
 	if (n < 0)
@@ -79,7 +79,7 @@ int	count_digits_nb(int nb)
 char	*itoa(int n, int len, char *s)
 {
 	long	nb;
-	
+
 	nb = (long)n;
 	if (nb == 0)
 	{

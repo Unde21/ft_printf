@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 12:50:01 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:37:32 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	if (*(format + pos_next) == 'x')
 		print_x(params, flags);
 	if (*(format + pos_next) == 'X')
-		print_X(params, flags);
+		print_upper_x(params, flags);
 	if (*(format + pos_next) == 'd' || *(format + pos_next) == 'i')
 		print_nb(params, flags);
 	if (*(format + pos_next) == 'u')

@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:34:02 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/25 12:50:18 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:47:56 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n)
 			--flags->size_precision;
 		}
 	}
-	if (flags-> zero && !flags->point)
+	if (flags->zero && !flags->point)
 	{
 		while (flags->size_padding > 0)
 		{

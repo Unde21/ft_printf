@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:59:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 02:17:38 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:45:54 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void	print_p(va_list *params, t_flags *flags)
 {
-		unsigned long arg;
-		int				total_length;
-		
-		flags->base_to = LOWER_BASE;
-		arg = va_arg(*params, unsigned long);
-		total_length = buffersize_addr(arg, flags);
-		convert_addr(flags, arg, total_length);
+	unsigned long	arg;
+	int				total_length;
+
+	flags->base_to = LOWER_BASE;
+	arg = va_arg(*params, unsigned long);
+	total_length = buffersize_addr(arg, flags);
+	convert_addr(flags, arg, total_length);
 }
 
 int	buffersize_addr(unsigned long n, t_flags *flags)

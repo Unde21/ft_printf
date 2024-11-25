@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manageflag_hex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 04:23:08 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:46:38 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 	adding_precision_buffer(flags, s, len, n);
 }
 
-void	adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
+void	adding_precision_buffer(t_flags *flags, char *s, int len,
+		unsigned int n)
 {
 	size_t	i;
 
@@ -74,7 +75,8 @@ void	adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n)
 	{
 		while (flags->size_padding > 0)
 		{
-			if (flags->prefix && len == 1)  // check les histoire de secure de len sa sert surement a rien maintenant
+			if (flags->prefix && len == 1)
+				// check les histoire de secure de len sa sert surement a rien maintenant
 				break ;
 			s[len] = '0';
 			--len;

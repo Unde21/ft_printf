@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/25 13:22:17 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:34:21 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(void)
 {
 	//int a = 0;
 	// char s[] = "hello world";
-	ft_printf("'%010u", 355);  // test avec 0
+	ft_printf("%s", "some string with %s hehe");
 	ft_printf("\n");
-	printf("'%010u", 355);
-	// printf("\n% 10d", 25);
+	ft_printf("%s", "some string with %s hehe");
+	//printf("\na : %d,   b : %d", a, b);
 }
 // cc -Wall -Wextra -Werror -I includes -L. -lftprintf main.c -o test
 /*

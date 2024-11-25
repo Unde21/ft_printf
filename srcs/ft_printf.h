@@ -6,7 +6,7 @@
 /*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:13:54 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/25 13:46:57 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		adding_precision_buffer(t_flags *flags, char *s, int len,
 				unsigned int n);
 void		adding_all_flag_buffer(t_flags *flags, char *s, int len,
 				unsigned int n);
-void		print_X(va_list *params, t_flags *flags);
+void		print_upper_x(va_list *params, t_flags *flags);
 void		print_x(va_list *params, t_flags *flags);
 char		*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s);
 int			buffersize_hex(unsigned int n, t_flags *flags);
@@ -94,12 +94,13 @@ void		print_nb(va_list *params, t_flags *flags);
 char		*itoa(int n, int len, char *s);
 
 /* format u */
-char	*unsigned_itoa(int n, int len, char *s);
-int	count_digits_u_nb(unsigned int n);
-int	buffersize_u_nb(unsigned int n, t_flags *flags);
-void	print_unb(va_list *params, t_flags *flags);
-char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n);
-void	adding_padding_u_nb(t_flags *flags, char *s);
+char		*unsigned_itoa(int n, int len, char *s);
+int			count_digits_u_nb(unsigned int n);
+int			buffersize_u_nb(unsigned int n, t_flags *flags);
+void		print_unb(va_list *params, t_flags *flags);
+char		*manage_flags_u_nb(t_flags *flags, char *s, int len,
+				unsigned int n);
+void		adding_padding_u_nb(t_flags *flags, char *s);
 
 void		change_struct_flags(char format, t_flags *flags);
 int			parse_format(va_list *params, char *format, t_flags *flags);
