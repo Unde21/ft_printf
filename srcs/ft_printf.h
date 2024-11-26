@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:39:34 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 15:12:20 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int			adding_prefix(t_flags *flags, char *s, int len, int check);
 
 char		*unsigned_itoa(int n, int len, char *s);
 char		*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n);
-char		*manage_flags_s(t_flags *flags, char *s, char *str);
+void		manage_flags_s(t_flags *flags, char *s, char *str);
 char		*manage_flags_nb(t_flags *flags, char *s, int len, int n);
 char		*manage_flags_c(t_flags *flags, char *s, int len, int c);
 char		*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n);

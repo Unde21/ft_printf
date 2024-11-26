@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:09 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:38:47 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 14:18:36 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 
 int	print_str(char *str)
 {
-	size_t	i;
 	int		count;
 
 	count = 0;
-	i = 0;
-	if (!str)
+	if (str == NULL)
 	{
 		count = write(1, "(null)", 6);
 		if (count == -1)

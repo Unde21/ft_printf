@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_s.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:56:16 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:21:40 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 15:45:23 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	print_s(va_list *params, t_flags *flags)
 	buffer = calloc(sizeof(char), total_length + 1);
 	if (!buffer)
 		return ;
-	buffer = manage_flags_s(flags, buffer, arg);
+	if (arg == NULL)
+		manage_flags_s(flags, buffer, "(null)");
+	else
+		manage_flags_s(flags, buffer, arg);
 	check_write_error = write(1, buffer, total_length);
 	free(buffer);
 	if (check_write_error == -1)
@@ -40,7 +43,10 @@ int	buffersize_s(char *str, t_flags *flags)
 {
 	int	buffer_size;
 
-	buffer_size = (int)ft_strlen(str);
+	if (str == NULL)
+		buffer_size = 6;
+	else
+		buffer_size = (int)ft_strlen(str);
 	if (flags->precision == -1)
 		flags->precision = 0;
 	if (flags->padding == -1)
@@ -58,23 +64,31 @@ int	buffersize_s(char *str, t_flags *flags)
 	return (buffer_size);
 }
 
-char	*manage_flags_s(t_flags *flags, char *s, char *str)
+void	manage_flags_s(t_flags *flags, char *s, char *str)
 {
 	size_t	i;
 	int		len_str;
 
 	len_str = (int)ft_strlen(str);
 	i = 0;
-	while (flags->size_padding > 0)
-	{
-		s[i] = ' ';
-		++i;
-		--flags->size_padding;
-	}
-	if (flags->precision == 0 || flags->precision > len_str)
-		flags->size_precision = len_str;
-	ft_strlcpy(&s[i], str, flags->size_precision + 1);
 	if (flags->less)
-		rev_space_and_char(s);
-	return (s);
+	{
+		ft_strlcpy(&s[i], str, len_str + 1);
+		while (flags->size_padding > 0)
+		{
+			s[len_str + i++] = ' ';
+			--flags->size_padding;
+		}
+	}
+	else
+	{	
+		while (flags->size_padding > 0)
+		{
+			s[i++] = ' ';
+			--flags->size_padding;
+		}
+		if (flags->precision == 0 || flags->precision > len_str)
+			flags->size_precision = len_str;
+		ft_strlcpy(&s[i], str, flags->size_precision + 1);
+	}
 }

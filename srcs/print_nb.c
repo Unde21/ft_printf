@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:21:00 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 14:12:39 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ int	buffersize_nb(int n, t_flags *flags)
 		flags->size_padding = flags->padding - (buffer_size
 				+ flags->size_precision);
 	buffer_size += flags->size_precision + flags->size_padding;
-	if (n < 0)
-		buffer_size += 1;
+	// if (n < 0)
+	// 	buffer_size += 1;
 	if (flags->space && n >= 0)
 		buffer_size += 1;
 	return (buffer_size);
