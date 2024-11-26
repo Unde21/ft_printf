@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:09 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 04:34:41 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:38:47 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,26 @@ int	print_str(char *str)
 	i = 0;
 	if (!str)
 	{
-		write(1, "(null)", 6);
+		count = write(1, "(null)", 6);
+		if (count == -1)
+			return (-1);
 		return (6);
 	}
-	write(1, str, ft_strlen(str));
-	while (str[i])
-	{
-		count += print_char(str[i]);
-		++i;
-	}
+	count = write(1, str, ft_strlen(str));
 	return (count);
 }
 
 int	print_char(int c)
 {
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 int	print_nbr(int nb, int check_form, int count)
 {
 	long	n;
+	int		check_write_error;
 
+	check_write_error = 0;
 	if (check_form == 0)
 		n = (long)nb;
 	else
@@ -58,23 +56,42 @@ int	print_nbr(int nb, int check_form, int count)
 		++count;
 	}
 	if (n >= 10)
+	{
 		count = print_nbr(n / 10, check_form, count);
-	count += print_char(n % 10 + '0');
+		if (count == -1)
+			return (-1);
+	}
+	check_write_error = print_char(n % 10 + '0');
+	if (check_write_error == -1)
+		return (-1);
+	count += check_write_error;
 	return (count);
 }
 
 int	print_hexa(unsigned int n, const char *base, int count)
 {
+	int	check_write_error;
+
+	check_write_error = 0;
 	if (n >= 16)
+	{
 		count = print_hexa(n / 16, base, count);
-	count += print_char(base[(n % 16)]);
+		if (count == -1)
+			return (-1);
+	}
+	check_write_error = print_char(base[(n % 16)]);
+	if (check_write_error == -1)
+		return (-1);
+	count += check_write_error;
 	return (count);
 }
 
 int	print_addr(unsigned long ptr, int count, int index)
 {
 	char	*base;
+	int		check_write_error;
 
+	check_write_error = 0;
 	if (ptr == 0)
 	{
 		write(1, "(nil)", 5);
@@ -87,7 +104,14 @@ int	print_addr(unsigned long ptr, int count, int index)
 	}
 	base = LOWER_BASE;
 	if (ptr >= 16)
+	{
 		count = print_addr(ptr / 16, count, index);
-	count += print_char(base[(ptr % 16)]);
+		if (count == -1)
+			return (-1);
+	}
+	check_write_error = print_char(base[(ptr % 16)]);
+	if (check_write_error == -1)
+		return (-1);
+	count += check_write_error;
 	return (count);
 }

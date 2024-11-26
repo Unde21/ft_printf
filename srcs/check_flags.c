@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:37:32 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 05:17:30 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 		print_s(params, flags);
 	if (*(format + pos_next) == 'c')
 		print_c(params, flags);
+	if (*(format + pos_next) == '%')
+		print_char('%');
 	return (pos_next);
 }
+
 int	check_format(va_list *params, char format)
 {
 	int		count;
@@ -59,6 +62,7 @@ int	check_format(va_list *params, char format)
 		count += print_char('%');
 	return (count);
 }
+
 int	pos_next_format(char *format)
 {
 	int	pos;

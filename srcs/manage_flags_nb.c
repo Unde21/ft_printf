@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_flags_nb.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 03:33:17 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 12:40:35 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:41:24 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	adding_precision_nb(t_flags *flags, char *s, int len, int n)
 {
 	size_t	i;
 
-	if (flags->zero && !flags->less && !flags->point)  // bizarre le flags less la si ya zero et less j ai pas les zero ? 
+	if (flags->zero && !flags->less && !flags->point)
 	{
 		while (flags->size_padding > 0)
 		{

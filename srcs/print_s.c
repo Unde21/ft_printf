@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:56:16 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/22 04:33:37 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:21:40 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,21 @@ void	print_s(va_list *params, t_flags *flags)
 	int		total_length;
 	char	*arg;
 	char	*buffer;
+	int		check_write_error;
 
+	check_write_error = 0;
 	arg = va_arg(*params, char *);
 	total_length = buffersize_s(arg, flags);
 	buffer = calloc(sizeof(char), total_length + 1);
 	if (!buffer)
 		return ;
 	buffer = manage_flags_s(flags, buffer, arg);
-	flags->count += write(1, buffer, total_length);
+	check_write_error = write(1, buffer, total_length);
 	free(buffer);
+	if (check_write_error == -1)
+		flags->count = -1;
+	else
+		flags->count += check_write_error;
 }
 
 int	buffersize_s(char *str, t_flags *flags)

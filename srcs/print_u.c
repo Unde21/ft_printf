@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_u.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:46:14 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:21:58 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	print_unb(va_list *params, t_flags *flags)
 	unsigned int	arg;
 	int				total_length;
 	char			*buffer;
+	int				check_write_error;
 
+	check_write_error = 0;
 	arg = va_arg(*params, unsigned int);
 	total_length = buffersize_u_nb(arg, flags);
 	buffer = calloc(sizeof(unsigned int), total_length + 1);
@@ -29,8 +31,12 @@ void	print_unb(va_list *params, t_flags *flags)
 	buffer = manage_flags_u_nb(flags, buffer, total_length - 1, arg);
 	if (flags->less)
 		rev_space_and_char(buffer);
-	flags->count = write(1, buffer, total_length) + 1;
 	free(buffer);
+	check_write_error = write(1, buffer, total_length);
+	if (check_write_error == -1)
+		flags->count = -1;
+	else
+		flags->count += check_write_error + 1;
 }
 
 int	buffersize_u_nb(unsigned int n, t_flags *flags)

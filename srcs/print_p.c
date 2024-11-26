@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_p.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:59:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:45:54 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:21:21 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,25 @@ int	buffersize_addr(unsigned long n, t_flags *flags)
 	buffer_size += flags->size_padding;
 	return (buffer_size);
 }
+
 void	convert_addr(t_flags *flags, unsigned long n, int len)
 {
 	char	*buffer;
+	int		check_write_error;
 
+	check_write_error = 0;
 	buffer = calloc(sizeof(char), len + 1);
 	if (!buffer)
 		return ;
 	flags->base_to = LOWER_BASE;
 	buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);
 	buffer = manage_flags_addr(flags, buffer, len - 1, n);
-	flags->count += write(1, buffer, len);
+	check_write_error = write(1, buffer, len);
 	free(buffer);
+	if (check_write_error == -1)
+		flags->count = -1;
+	else
+		flags->count += check_write_error;
 }
 
 char	*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n)

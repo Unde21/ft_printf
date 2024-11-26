@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_nb.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:47:10 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:21:00 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	print_nb(va_list *params, t_flags *flags)
 	int		arg;
 	int		total_length;
 	char	*buffer;
-
+	int		check_write_error;
+	
+	check_write_error = 0;
 	arg = va_arg(*params, int);
 	total_length = buffersize_nb(arg, flags);
 	buffer = calloc(sizeof(int), total_length + 1);
@@ -27,8 +29,12 @@ void	print_nb(va_list *params, t_flags *flags)
 		return ;
 	buffer = itoa(arg, total_length - 1, buffer);
 	buffer = manage_flags_nb(flags, buffer, total_length - 1, arg);
-	flags->count += write(1, buffer, total_length);
+	check_write_error = write(1, buffer, total_length);
 	free(buffer);
+	if (check_write_error == -1)
+		flags->count = -1;
+	else
+		flags->count += check_write_error;
 }
 
 int	buffersize_nb(int n, t_flags *flags)

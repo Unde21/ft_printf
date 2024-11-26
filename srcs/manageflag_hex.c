@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manageflag_hex.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:46:38 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 01:34:16 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char	*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s)
 	}
 	return (s);
 }
+
 void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 {
 	len -= count_hex_digits(n);
@@ -94,6 +95,7 @@ void	adding_precision_buffer(t_flags *flags, char *s, int len,
 		--flags->size_padding;
 	}
 }
+
 int	adding_prefix(t_flags *flags, char *s, int len, int check)
 {
 	if (check == 0)

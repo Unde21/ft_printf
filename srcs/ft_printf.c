@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/25 13:13:23 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 04:46:04 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <unistd.h>
+
 
 int	ft_printf(const char *format, ...)
 {
@@ -56,6 +57,8 @@ int	parse_format(va_list *params, char *format, t_flags *flags)
 		else
 			flags->count += print_char(*format);
 		++format;
+		if (flags->count == -1)
+				return (-1);
 	}
 	return (flags->count);
 }

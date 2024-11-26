@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/25 13:34:21 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/26 05:20:05 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "srcs/ft_printf.h"
+#include "ft_printf.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
 
 int	main(void)
 {
 	//int a = 0;
 	// char s[] = "hello world";
-	ft_printf("%s", "some string with %s hehe");
-	ft_printf("\n");
-	ft_printf("%s", "some string with %s hehe");
+	int a = ft_printf("%%%d", 10);
+	printf("\n");
+	int b = printf("%10.10%LALALALA");
+	printf("\n a : %d  b : %d", a, b);
 	//printf("\na : %d,   b : %d", a, b);
 }
 // cc -Wall -Wextra -Werror -I includes -L. -lftprintf main.c -o test

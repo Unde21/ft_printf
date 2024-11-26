@@ -12,9 +12,21 @@ OBJ_DIR := .objs/
 DEP_DIR := .deps/
 LIBFT_DIR := libft/
 
-INCS := -I . -I $(LIBFT_DIR)
+INCS := -I. -I$(LIBFT_DIR)
 
-SRCS := $(shell find srcs -name "*.c")
+SRCS := srcs/ft_printf.c \
+	srcs/check_flags.c \
+	srcs/manage_flags_nb.c \
+	srcs/manage_flags_u_nb.c \
+	srcs/manageflag_hex.c \
+	srcs/print_c.c \
+	srcs/print_format.c \
+	srcs/print_hex.c \
+	srcs/print_nb.c \
+	srcs/print_p.c \
+	srcs/print_s.c \
+	srcs/print_u.c \
+	srcs/utils.c \
 
 OBJS := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 DEPS := $(SRCS:$(SRC_DIR)%.c=$(DEP_DIR)%.d)
