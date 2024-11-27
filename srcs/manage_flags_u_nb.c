@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:34:02 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/27 04:26:28 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 05:57:09 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n)
 		}
 	}
 	adding_padding_u_nb(flags, s);
+	if (flags->less && n != 0)
+		rev_space_and_char(s);
+	else
+		rev_space_nb(s, tmp);
 	return (s);
 }
 
