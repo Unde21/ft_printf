@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 06:00:57 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 20:46:33 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,22 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	int	buffer_size;
 
 	buffer_size = count_digits_u_nb(n);
-	if (flags->precision == -1)
-		flags->precision = 0;
-	if (flags->point && flags->precision == 0 && flags->padding != 0)
+	if (flags->point && flags->precision == -1 && flags->padding == -1)
+		return (buffer_size);
+	// printf("buffer size : %d, paddi %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
+	if (flags->point && flags->precision == -1 && flags->padding != 0)
 	{
 		if (n == 0)
 			buffer_size -= 1;
 		if (flags->is_precision == false)
+		{
 			flags->size_padding = flags->padding - buffer_size;
-		return (flags->padding);
+			return (flags->padding);
+		}
 		flags->precision = flags->padding;
 		flags->size_precision = flags->padding - buffer_size;
 		if (flags->padding > buffer_size)
 		{
-			
-			flags->size_padding = flags->padding;
 			return (flags->padding);
 		}
 		return (buffer_size);
@@ -70,12 +71,11 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	}
 	if (flags->padding > buffer_size + flags->size_precision)
 	{
-		if (n == 0 && flags->point)
+		if (n == 0 && flags->point && !flags->less)
 			buffer_size -= 1;
 		flags->size_padding = flags->padding - (buffer_size
 				+ flags->size_precision);
 	}
-	printf("buffer size : %d, paddi %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	buffer_size += flags->size_precision + flags->size_padding;
 	return (buffer_size);
 }

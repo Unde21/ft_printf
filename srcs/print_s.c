@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:56:16 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 00:33:02 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 21:21:37 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,8 @@ int	buffersize_s(char *str, t_flags *flags)
 		buffer_size = 6;
 	else
 		buffer_size = (int)ft_strlen(str);
-	if (flags->precision == -1)
-		flags->precision = 0;
-	if (flags->padding == -1)
-		flags->padding = 0;
+	if (flags->point && flags->precision == -1 && flags->padding == -1)
+		return (buffer_size);
 	if (str[0] == '\0' && flags->point && flags->padding != 0 && flags->precision != 0)
 		{
 			flags->size_padding = flags->padding;
@@ -58,19 +56,24 @@ int	buffersize_s(char *str, t_flags *flags)
 		}
 	if (flags->point && flags->precision == 0 && flags->padding != 0 && str != NULL)
 	{
+		if (flags->is_precision == false)
+		{
+			flags->size_padding = flags->padding - buffer_size;
+			return (flags->padding);
+		}
 		flags->size_precision = flags->padding;
 		if (buffer_size > flags->size_precision)
 			buffer_size = flags->size_precision;
 		return (buffer_size);
 	}
-	if (flags->point && flags->precision < buffer_size)
+	if (flags->padding > buffer_size + flags->precision)
 	{
-		flags->size_precision = flags->precision;
-		buffer_size = flags->size_precision;
+		flags->size_padding = flags->padding - buffer_size;
 	}
 	if (flags->padding > buffer_size)
 		flags->size_padding = flags->padding - buffer_size;
 	buffer_size += flags->size_padding;
+	// printf("buffer size : %d, paddi %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	return (buffer_size);
 }
 
@@ -83,7 +86,9 @@ void	manage_flags_s(t_flags *flags, char *s, char *str)
 	i = 0;
 	if (flags->less)
 	{
-		ft_strlcpy(&s[i], str, len_str + 1);
+		if (flags->size_precision == 0 || flags->size_precision > len_str)
+			flags->size_precision = len_str;
+		ft_strlcpy(&s[i], str, flags->size_precision + 1);
 		while (flags->size_padding > 0)
 		{
 			s[len_str + i++] = ' ';
@@ -92,7 +97,7 @@ void	manage_flags_s(t_flags *flags, char *s, char *str)
 	}
 	else
 	{	
-		if (flags->precision == 0 || flags->precision > len_str)
+		if (flags->size_precision == 0 || flags->size_precision > len_str)
 			flags->size_precision = len_str;
 		while (flags->size_padding > 0)
 		{
