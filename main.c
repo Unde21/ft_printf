@@ -3,29 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/26 15:27:14 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 03:12:57 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "srcs/ft_printf.h"
 #include <stdio.h>
 
+// ATTENTION AU MAKE RE
+
 int	main(void)
 {
-	//int a = 0;
+	int a = 0;
+	int b = 0;
 	// char s[] = "hello world";
-	int a = ft_printf("%.7s", "hello");
+	//  a = 0; //= ft_printf("%.7s%.2s", "hello", "world");
+	// printf("\n");
+	// b = 0; //= printf("%.7s%.2s", "hello", "world");
+	// printf("\n a : %d  b : %d\n", a, b);
+	a = ft_printf("%-3d", 0);
 	printf("\n");
-	int b = printf("%.7s", "hello");
-	printf("\n a : %d  b : %d\n", a, b);
-	a = ft_printf("%23s", (char *)NULL);
-	printf("\n");
-	b = printf("%23s", (char *)NULL);
+	b = printf("%-3d", 0);
+	// printf("\n a %d   b %d\n", a, b);
+	// printf("\n");
+	// a = ft_printf("%7.5s", "tubular");
+	// printf("\n");
+	// b = printf("%7.5s", "tubular");
 	printf("\n a %d   b %d", a, b);
-	//printf("\na : %d,   b : %d", a, b);
 }
 // cc -Wall -Wextra -Werror -I includes -L. -lftprintf main.c -o test
 /*
@@ -60,3 +67,4 @@ int	main(void)
 // gerer le % seul pour return -1 (start count a - 1)
 // verifier les types dans count_hex_digits ->addr
 // voir si il faut bouger la fonction adding_prefix 
+

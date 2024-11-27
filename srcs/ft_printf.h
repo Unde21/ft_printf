@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 15:12:20 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 03:01:45 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_flags
 }			t_flags;
 
 void		rev_space_and_char(char *str);
+void		rev_space_nb(char *s, size_t len);
 void		reset_struct(t_flags *flags);
 void		print_x(va_list *params, t_flags *flags);
 void		print_upper_x(va_list *params, t_flags *flags);
@@ -85,7 +86,7 @@ void		manage_flags_s(t_flags *flags, char *s, char *str);
 char		*manage_flags_nb(t_flags *flags, char *s, int len, int n);
 char		*manage_flags_c(t_flags *flags, char *s, int len, int c);
 char		*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n);
-char		*itoa(int n, int len, char *s);
+char		*itoa(int n, int len, char *s, t_flags *flags);
 char		*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s);
 
 bool		valid_format(char format);

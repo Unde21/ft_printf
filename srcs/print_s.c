@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_s.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 21:56:16 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 15:45:23 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 00:33:02 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,18 @@ int	buffersize_s(char *str, t_flags *flags)
 		flags->precision = 0;
 	if (flags->padding == -1)
 		flags->padding = 0;
-	if (flags->point && flags->precision == 0 && flags->padding != 0)
-		flags->precision = flags->padding;
+	if (str[0] == '\0' && flags->point && flags->padding != 0 && flags->precision != 0)
+		{
+			flags->size_padding = flags->padding;
+			return (flags->size_padding);
+		}
+	if (flags->point && flags->precision == 0 && flags->padding != 0 && str != NULL)
+	{
+		flags->size_precision = flags->padding;
+		if (buffer_size > flags->size_precision)
+			buffer_size = flags->size_precision;
+		return (buffer_size);
+	}
 	if (flags->point && flags->precision < buffer_size)
 	{
 		flags->size_precision = flags->precision;
@@ -82,13 +92,13 @@ void	manage_flags_s(t_flags *flags, char *s, char *str)
 	}
 	else
 	{	
+		if (flags->precision == 0 || flags->precision > len_str)
+			flags->size_precision = len_str;
 		while (flags->size_padding > 0)
 		{
 			s[i++] = ' ';
 			--flags->size_padding;
 		}
-		if (flags->precision == 0 || flags->precision > len_str)
-			flags->size_precision = len_str;
 		ft_strlcpy(&s[i], str, flags->size_precision + 1);
 	}
 }

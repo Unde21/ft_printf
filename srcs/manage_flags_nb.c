@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 03:33:17 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:41:24 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 03:09:20 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,33 @@
 
 char	*manage_flags_nb(t_flags *flags, char *s, int len, int n)
 {
-	len -= count_digits_nb(n);
+	int	tmp;
+	
+	if (n == 0)
+		len -= count_digits_nb(n) - 1;
+	else
+		len -= count_digits_nb(n);
+	tmp = len;
 	if (flags->point)
 	{
 		while (flags->size_precision > 0)
 		{
-			s[len] = '0';
-			--len;
+			s[len--] = '0';
 			--flags->size_precision;
 		}
 	}
-	if (flags->sign && !flags->zero && n >= 0)
+	if (flags->sign && !flags->zero && n > 0)
 		len = adding_prefix(flags, s, len, 0);
+	else if (flags->sign && !flags->zero && n == 0)
+		len = adding_prefix(flags, s, len -1, 0);
 	if (flags->zero && flags->point && flags->sign)
 		len = adding_prefix(flags, s, len, 0);
 	adding_precision_nb(flags, s, len, n);
 	if (flags->space && !flags->sign && n >= 0)
 		s[0] = ' ';
-	if (flags->less)
+	if (flags->less && n == 0)
+		rev_space_nb(s, tmp);
+	else if (flags->less)
 		rev_space_and_char(s);
 	return (s);
 }
@@ -48,14 +57,12 @@ void	adding_precision_nb(t_flags *flags, char *s, int len, int n)
 			--len;
 			--flags->size_padding;
 		}
-		if (flags->prefix && n != 0)
+		if (flags->prefix)
 			len = adding_prefix(flags, s, len, 0);
 	}
 	i = 0;
-	if (n < 0 && len > 0)
-		s[--len] = '-';
-	else if (n < 0 && len == 0)
-		s[0] = '-';
+	if (n < 0)
+		s[len + 1] = '-';
 	while (flags->size_padding > 0 && s[i] != '-')
 	{
 		s[i] = ' ';
@@ -63,3 +70,25 @@ void	adding_precision_nb(t_flags *flags, char *s, int len, int n)
 		--flags->size_padding;
 	}
 }
+
+void	rev_space_nb(char *s, size_t len)
+{
+	size_t	i;
+	char	swap;
+	size_t	j;
+
+	swap = '0';
+	i = 0;
+	j = 0;
+	while (s[j] == ' ')
+		j++;
+	while (j <= len && s[i] == ' ')
+	{
+		swap = s[i];
+		s[i] = s[j];
+		s[j] = swap;
+		++i;
+		++j;
+	}
+}
+
