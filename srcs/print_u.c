@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 20:46:33 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 22:13:27 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_unb(va_list *params, t_flags *flags)
 	buffer = calloc(sizeof(unsigned int), total_length + 1);
 	if (!buffer)
 		return ;
-	buffer = itoa(arg, total_length , buffer, flags);
+	buffer = unsigned_itoa(arg, total_length - 1, buffer, flags);
 	buffer = manage_flags_u_nb(flags, buffer, total_length - 1, arg);
 	check_write_error = write(1, buffer, total_length);
 	free(buffer);
@@ -44,7 +44,6 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	buffer_size = count_digits_u_nb(n);
 	if (flags->point && flags->precision == -1 && flags->padding == -1)
 		return (buffer_size);
-	// printf("buffer size : %d, paddi %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	if (flags->point && flags->precision == -1 && flags->padding != 0)
 	{
 		if (n == 0)

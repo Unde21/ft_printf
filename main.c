@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/27 21:20:38 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 00:07:38 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdio.h>
 
 // ATTENTION AU MAKE RE
+// touch sur libft recompile pas 
 
 int	main(void)
 {
@@ -24,9 +25,9 @@ int	main(void)
 	// printf("\n");
 	// b = 0; //= printf("%.7s%.2s", "hello", "world");
 	// printf("\n a : %d  b : %d\n", a, b);
-	a = ft_printf("%-5s", "goes over");
+	a = ft_printf("%.s", "hello");
 	printf("\n");
-	b = printf("%-5s", "goes over");
+	b = printf("%.s", "hello");
 	// printf("\n a %d   b %d\n", a, b);
 	// printf("\n");
 	// a = ft_printf("%7.5s", "tubular");
