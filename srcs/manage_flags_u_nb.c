@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_flags_u_nb.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:34:02 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/25 13:47:56 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:26:28 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n)
 {
-	len -= count_digits_u_nb(n);
+	int	tmp;
+	
+	if (n == 0)
+		len -= count_digits_u_nb(n) - 1;
+	else
+		len -= count_digits_u_nb(n);
+	tmp = len;
 	if (flags->point)
 	{
 		while (flags->size_precision > 0)
 		{
-			s[len] = '0';
-			--len;
+			s[len--] = '0';
 			--flags->size_precision;
 		}
 	}

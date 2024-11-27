@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 02:59:35 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:43:55 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,17 @@ void	adding_precision_buffer(t_flags *flags, char *s, int len,
 	{
 		while (flags->size_padding > 0)
 		{
-			if (flags->prefix && len == 1)
-				// check les histoire de secure de len sa sert surement a rien maintenant
-				break ;
 			s[len] = '0';
 			--len;
 			--flags->size_padding;
 		}
-		if (flags->prefix && n != 0 && len >= 1)
+		if (flags->prefix && n != 0)
 			len = adding_prefix(flags, s, len, 1);
 	}
 	i = 0;
 	while (flags->size_padding > 0)
 	{
-		if (s[i] != '0') // sa aussi
-			s[i] = ' ';
+		s[i] = ' ';
 		++i;
 		--flags->size_padding;
 	}

@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 03:01:45 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:27:28 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_flags
 	bool	less;
 	bool	prefix;
 	bool	point;
+	bool	is_precision;
 	size_t	nb;
 	int		count;
 	int		padding;
@@ -52,7 +53,7 @@ void		print_c(va_list *params, t_flags *flags);
 void		convert_hex(t_flags *flags, unsigned int n, int len);
 void		convert_addr(t_flags *flags, unsigned long n, int len);
 void		change_struct_flags(char format, t_flags *flags);
-void		adding_precision_nb(t_flags *flags, char *s, int len, int n);
+void		adding_padding_nb(t_flags *flags, char *s, int len, int n);
 void		adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n);
 void		adding_padding_u_nb(t_flags *flags, char *s);
 void		adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n);
@@ -80,7 +81,7 @@ int			buffersize_c(t_flags *flags);
 int			buffersize_addr(unsigned long n, t_flags *flags);
 int			adding_prefix(t_flags *flags, char *s, int len, int check);
 
-char		*unsigned_itoa(int n, int len, char *s);
+char		*unsigned_itoa(unsigned int n, int len, char *s, t_flags *flags);
 char		*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n);
 void		manage_flags_s(t_flags *flags, char *s, char *str);
 char		*manage_flags_nb(t_flags *flags, char *s, int len, int n);

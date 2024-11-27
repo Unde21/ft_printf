@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/27 03:12:57 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:44:59 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	main(void)
 	// printf("\n");
 	// b = 0; //= printf("%.7s%.2s", "hello", "world");
 	// printf("\n a : %d  b : %d\n", a, b);
-	a = ft_printf("%-3d", 0);
+	a = ft_printf("%-.6x", 0);
 	printf("\n");
-	b = printf("%-3d", 0);
+	b = printf("%-.6x", 0);
 	// printf("\n a %d   b %d\n", a, b);
 	// printf("\n");
 	// a = ft_printf("%7.5s", "tubular");

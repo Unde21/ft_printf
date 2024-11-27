@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 03:33:17 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 03:09:20 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:27:18 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*manage_flags_nb(t_flags *flags, char *s, int len, int n)
 		len = adding_prefix(flags, s, len -1, 0);
 	if (flags->zero && flags->point && flags->sign)
 		len = adding_prefix(flags, s, len, 0);
-	adding_precision_nb(flags, s, len, n);
+	adding_padding_nb(flags, s, len, n);
 	if (flags->space && !flags->sign && n >= 0)
 		s[0] = ' ';
 	if (flags->less && n == 0)
@@ -45,7 +45,7 @@ char	*manage_flags_nb(t_flags *flags, char *s, int len, int n)
 	return (s);
 }
 
-void	adding_precision_nb(t_flags *flags, char *s, int len, int n)
+void	adding_padding_nb(t_flags *flags, char *s, int len, int n)
 {
 	size_t	i;
 

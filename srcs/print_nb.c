@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 03:13:13 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:15:01 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ int	buffersize_nb(int n, t_flags *flags)
 	if (flags->point && flags->precision == 0 && flags->padding != 0)
 	{
 		if (n == 0)
+		{
 			buffer_size -= 1;
+			if (flags->is_precision ==  false)
+				flags->size_padding = flags->padding;
+			return (flags->padding);
+		}
 		else if (n < 0)
 			flags->padding += 1;
 		flags->precision = flags->padding;
@@ -67,7 +72,7 @@ int	buffersize_nb(int n, t_flags *flags)
 		buffer_size += 1;
 	if (flags->padding > buffer_size + flags->size_precision)
 	{
-		if (n == 0 && !flags->less)
+		if (n == 0 && !flags->less && flags->point)
 			buffer_size -= 1;
 		flags->size_padding = flags->padding - (buffer_size
 				+ flags->size_precision);

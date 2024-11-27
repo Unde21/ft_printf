@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:46:04 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/27 04:06:38 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,11 @@ int	parse_flags(char *format, t_flags *flags)
 		if (*format > '0' && *format <= '9')
 		{
 			if (flags->padding == -1)
+			{
+				if (*(format - 1) == '.')
+					flags->is_precision = true;
 				flags->padding = ft_atoi((const char *)format);
+			}
 			else
 				flags->precision = ft_atoi((const char *)format);
 			while (*format > '0' && *format <= '9')
@@ -116,4 +120,5 @@ void	reset_struct(t_flags *flags)
 	flags->precision = -1;
 	flags->size_precision = 0;
 	flags->size_padding = 0;
+	flags->is_precision = false;
 }
