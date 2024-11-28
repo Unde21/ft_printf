@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 04:06:38 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 04:00:33 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	parse_flags(char *format, t_flags *flags)
 		}
 		++format;
 	}
-	if (flags->nb == 0)
-		return (0);
-	return (1);
+	if (is_flags(flags))
+		return (1);
+	return (0);
 }
 
 void	change_struct_flags(char format, t_flags *flags)
@@ -103,8 +103,6 @@ void	change_struct_flags(char format, t_flags *flags)
 		flags->point = true;
 	if (format == '0' && flags->padding == -1)
 		flags->zero = true;
-	else
-		++flags->nb;
 }
 
 void	reset_struct(t_flags *flags)

@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 20:46:15 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 03:55:30 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	print_nb(va_list *params, t_flags *flags)
 	
 	check_write_error = 0;
 	arg = va_arg(*params, int);
+	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0) && !flags->sign && !flags->space)
+		return ;
 	total_length = buffersize_nb(arg, flags);
 	buffer = calloc(sizeof(int), total_length + 1);
 	if (!buffer)
@@ -41,12 +43,8 @@ int	buffersize_nb(int n, t_flags *flags)
 {
 	int	buffer_size;
 
-	buffer_size = count_digits_nb(n);
-	if (flags->point && flags->precision == -1 && flags->padding == -1)
-		return (buffer_size);
-	if (flags->precision == -1)
-		flags->precision = 0;
-	if (flags->point && flags->precision == 0 && flags->padding != 0)
+buffer_size = count_digits_nb(n);
+	if (flags->point && flags->precision == -1 && flags->padding != -1)
 	{
 		if (n == 0)
 			buffer_size -= 1;
@@ -76,14 +74,19 @@ int	buffersize_nb(int n, t_flags *flags)
 	{
 		if (flags->point && flags->precision >= count_digits_nb(n) && n < 0)
 			flags->size_precision = flags->precision - count_digits_nb(n) + 1;
-		if (n == 0 && !flags->less && flags->point)
-			buffer_size -= 1;
-		flags->size_padding = flags->padding - (buffer_size
+		// if (n == 0 && !flags->less && flags->point)
+		// 	buffer_size -= 1;
+		if (n == 0 && flags->point)
+			flags->size_padding = 1;
+		flags->size_padding += flags->padding - (buffer_size
 				+ flags->size_precision);
 	}
 	buffer_size += flags->size_precision + flags->size_padding;
+	if (n == 0 && flags->point)
+			buffer_size -= 1;
 	if (flags->space && n >= 0)
 		buffer_size += 1;
+	//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	return (buffer_size);
 }
 

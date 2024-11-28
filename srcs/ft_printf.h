@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 20:20:19 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 04:00:38 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_flags
 	bool	prefix;
 	bool	point;
 	bool	is_precision;
-	size_t	nb;
 	int		count;
 	int		padding;
 	int		precision;
@@ -90,6 +89,7 @@ char		*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n);
 char		*itoa(int n, int len, char *s, t_flags *flags);
 char		*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s);
 
+bool		is_flags(t_flags *flags);
 bool		valid_format(char format);
 
 #endif

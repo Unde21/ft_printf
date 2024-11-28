@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 20:36:28 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 03:58:25 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,13 @@ bool	valid_format(char c)
 {
 	return (c == 'c' || c == 'd' || c == 'i' || c == 'p' || c == 'x' || c == 'X'
 		|| c == 'u' || c == 's' || c == '%');
+}
+
+bool	is_flags(t_flags *flags)
+{
+	if (flags->less || flags->sign || flags->zero 
+		|| flags->point || flags->space || flags->prefix || flags->padding != -1
+		|| flags->precision != -1)
+		return (true);
+	return (false);
 }
