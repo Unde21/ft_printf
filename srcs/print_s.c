@@ -46,7 +46,10 @@ int	buffersize_s(char *str, t_flags *flags)
 	{
 		if (flags->is_precision == false)
 		{
-			flags->size_padding = flags->padding - buffer_size;
+			// if (flags->padding > buffer_size)
+			// 	flags->size_padding = flags->padding - buffer_size;
+			// else
+			flags->size_padding = flags->padding;
 			return (flags->padding);
 		}
 		flags->precision = flags->padding;
@@ -64,7 +67,10 @@ int	buffersize_s(char *str, t_flags *flags)
 		}
 		else
 			flags->size_precision = flags->precision - buffer_size;
+		if (flags->padding != -1 && flags->padding > buffer_size)
+			flags->size_padding = flags->padding - buffer_size;
 
+		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	}
 	if (flags->padding > flags->size_precision)
 	{

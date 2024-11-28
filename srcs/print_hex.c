@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_hex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 06:24:13 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 14:00:56 by sammy            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	print_x(va_list *params, t_flags *flags)
 
 	flags->base_to = LOWER_BASE;
 	arg = va_arg(*params, unsigned int);
+	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0))
+		return ;
 	total_length = buffersize_hex(arg, flags);
 	convert_hex(flags, arg, total_length);
 }
@@ -32,6 +34,8 @@ void	print_upper_x(va_list *params, t_flags *flags)
 
 	flags->base_to = UPPER_BASE;
 	arg = va_arg(*params, unsigned int);
+	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0) && !flags->sign && !flags->space)
+		return ;
 	total_length = buffersize_hex(arg, flags);
 	convert_hex(flags, arg, total_length);
 }
@@ -41,17 +45,24 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	int	buffer_size;
 
 	buffer_size = count_hex_digits(n);
-	if (flags->precision == -1)
-		flags->precision = 0;
-	if (flags->point && flags->precision == 0 && flags->padding != 0)
+	if (flags->point && flags->precision == -1 && flags->padding != -1)
 	{
+		if (n == 0)
+				buffer_size -= 1;
 		if (flags->is_precision == false)
 		{
-			buffer_size -= 1;
-			flags->size_padding = flags->padding;	
+			if (flags->padding > buffer_size)
+				flags->size_padding = flags->padding - buffer_size;
+			else
+				flags->padding = buffer_size;
+			return (flags->padding);
 		}
-		else
-			flags->precision = flags->padding;
+		flags->precision = flags->padding;
+		flags->size_precision = flags->padding - buffer_size;
+		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
+		if (flags->padding - buffer_size > 0)
+			return (flags->padding);
+		return (buffer_size);
 	}
 	if (flags->point && flags->precision > buffer_size)
 		flags->size_precision = flags->precision - buffer_size;
