@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 04:00:33 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 04:05:15 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	reset_struct(t_flags *flags)
 	flags->space = false;
 	flags->point = false;
 	flags->zero = false;
-	flags->nb = 0;
 	flags->padding = -1;
 	flags->precision = -1;
 	flags->size_precision = 0;

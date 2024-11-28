@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 20:41:20 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/28 06:24:13 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	int	buffer_size;
 
 	buffer_size = count_hex_digits(n);
-	if (flags->point && flags->precision == -1 && flags->padding == -1)
-		return (count_hex_digits(n));
-	if (flags->point && flags->precision == -1 && flags->padding != 0)
+	if (flags->precision == -1)
+		flags->precision = 0;
+	if (flags->point && flags->precision == 0 && flags->padding != 0)
 	{
 		if (flags->is_precision == false)
 		{
