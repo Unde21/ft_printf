@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 09:15:33 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:34:43 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	count_hex_digits(unsigned long n)
 	return (count);
 }
 
-char	*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s)
+char	*ft_itoa_base_hex(unsigned long n, t_flags *flags, int len, char *s)
 {
 	char	*base_to;
 

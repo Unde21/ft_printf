@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 04:00:38 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:34:48 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		change_struct_flags(char format, t_flags *flags);
 void		adding_padding_nb(t_flags *flags, char *s, int len, int n);
 void		adding_precision_buffer(t_flags *flags, char *s, int len, unsigned int n);
 void		adding_padding_u_nb(t_flags *flags, char *s);
+void		addr_null(char *s, int len, t_flags *flags);
 void		adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n);
 
 int			print_str(char *str);
@@ -86,8 +87,8 @@ void		manage_flags_s(t_flags *flags, char *s, char *str);
 char		*manage_flags_nb(t_flags *flags, char *s, int len, int n);
 char		*manage_flags_c(t_flags *flags, char *s, int len, int c);
 char		*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n);
-char		*itoa(int n, int len, char *s, t_flags *flags);
-char		*ft_itoa_base_hex(unsigned int n, t_flags *flags, int len, char *s);
+char		*int_toa(int n, int len, char *s, t_flags *flags);
+char		*ft_itoa_base_hex(unsigned long n, t_flags *flags, int len, char *s);
 
 bool		is_flags(t_flags *flags);
 bool		valid_format(char format);

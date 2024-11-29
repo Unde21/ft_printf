@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_c.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:49:05 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 14:49:31 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:08:11 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_c(va_list *params, t_flags *flags)
 	count = 0;
 	arg = va_arg(*params, int);
 	total_length = buffersize_c(flags);
-	buffer = calloc(sizeof(char), total_length + 1);
+	buffer = ft_calloc(sizeof(char), total_length + 1);
 	if (!buffer)
 		return ;
 	buffer = manage_flags_c(flags, buffer, total_length - 1, arg);

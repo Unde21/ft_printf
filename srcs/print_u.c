@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 05:21:10 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:09:54 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_unb(va_list *params, t_flags *flags)
 	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0))
 		return ;
 	total_length = buffersize_u_nb(arg, flags);
-	buffer = calloc(sizeof(unsigned int), total_length + 1);
+	buffer = ft_calloc(sizeof(unsigned int), total_length + 1);
 	if (!buffer)
 		return ;
 	buffer = unsigned_itoa(arg, total_length, buffer, flags);

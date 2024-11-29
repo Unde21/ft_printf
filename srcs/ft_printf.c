@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 04:05:15 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 10:50:06 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,25 @@ int	parse_format(va_list *params, char *format, t_flags *flags)
 
 int	parse_flags(char *format, t_flags *flags)
 {
+	size_t	i;
+
+	i = 1;
 	while (valid_format(*format) == 0 && *format != '\0')
 	{
 		change_struct_flags(*format, flags);
-		if (*format > '0' && *format <= '9')
+		if (*format >= '0' && *format <= '9')
 		{
+			while (*format + i == '0')
+				i++;
 			if (flags->padding == -1)
 			{
-				if (*(format - 1) == '.')
-					flags->is_precision = true;
+					if (*(format - i) == '.')
+						flags->is_precision = true;
 				flags->padding = ft_atoi((const char *)format);
 			}
 			else
 				flags->precision = ft_atoi((const char *)format);
-			while (*format > '0' && *format <= '9')
+			while (*format >= '0' && *format <= '9')
 				++format;
 			continue ;
 		}

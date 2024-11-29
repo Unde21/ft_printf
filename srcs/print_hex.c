@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 09:13:42 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:08:25 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	convert_hex(t_flags *flags, unsigned int n, int len)
 	int		check_write_error;
 
 	check_write_error = 0;
-	buffer = calloc(sizeof(char), len + 1);
+	buffer = ft_calloc(sizeof(char), len + 1);
 	if (!buffer)
 		return ;
 	buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);

@@ -14,7 +14,7 @@ void	print_s(va_list *params, t_flags *flags)
 	if (flags->point && flags->precision == -1 && flags->padding == -1)
 		return ;
 	total_length = buffersize_s(arg, flags);
-	buffer = calloc(sizeof(char), total_length + 1);
+	buffer = ft_calloc(sizeof(char), total_length + 1);
 	if (!buffer)
 		return ;
 	if (arg == NULL)
@@ -46,14 +46,12 @@ int	buffersize_s(char *str, t_flags *flags)
 	{
 		if (flags->is_precision == false)
 		{
-			// if (flags->padding > buffer_size)
-			// 	flags->size_padding = flags->padding - buffer_size;
-			// else
 			flags->size_padding = flags->padding;
 			return (flags->padding);
 		}
 		flags->precision = flags->padding;
 		flags->size_precision = flags->padding - buffer_size;
+		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 		if (flags->padding > buffer_size)
 			return (buffer_size);
 		return (flags->precision);
@@ -70,7 +68,6 @@ int	buffersize_s(char *str, t_flags *flags)
 		if (flags->padding != -1 && flags->padding > buffer_size)
 			flags->size_padding = flags->padding - buffer_size;
 
-		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	}
 	if (flags->padding > flags->size_precision)
 	{

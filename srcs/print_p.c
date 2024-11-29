@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:59:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 04:21:21 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:31:36 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,11 @@ int	buffersize_addr(unsigned long n, t_flags *flags)
 {
 	int	buffer_size;
 
-	buffer_size = count_hex_digits(n) + 2;
+	buffer_size = 0;
+	if (n == 0)
+		buffer_size = 5;
+	else
+		buffer_size = count_hex_digits(n) + 2;
 	if (flags->padding > buffer_size)
 		flags->size_padding = flags->padding - buffer_size;
 	buffer_size += flags->size_padding;
@@ -42,12 +46,17 @@ void	convert_addr(t_flags *flags, unsigned long n, int len)
 	int		check_write_error;
 
 	check_write_error = 0;
-	buffer = calloc(sizeof(char), len + 1);
+	buffer = ft_calloc(sizeof(char), len + 1);
 	if (!buffer)
 		return ;
 	flags->base_to = LOWER_BASE;
-	buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);
-	buffer = manage_flags_addr(flags, buffer, len - 1, n);
+	if (n == 0)
+		addr_null(buffer, len, flags);
+	else
+	{
+		buffer = ft_itoa_base_hex(n, flags, len - 1, buffer);
+		buffer = manage_flags_addr(flags, buffer, len - 1, n);
+	}
 	check_write_error = write(1, buffer, len);
 	free(buffer);
 	if (check_write_error == -1)
@@ -72,4 +81,22 @@ char	*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n)
 	if (flags->less && flags->padding > 0)
 		rev_space_and_char(s);
 	return (s);
+}
+
+void	addr_null(char *s, int len, t_flags *flags)
+{
+	char	str[] = "(nil)";
+	int		len_str;
+
+	len_str = (int)ft_strlen(str);
+	ft_strlcpy(&s[len - len_str], str, 6);
+	len -= len_str + 1;
+	while (flags->size_padding > 0)
+	{
+		s[len] = ' ';
+		--len;
+		--flags->size_padding;
+	}
+	if (flags->less && flags->padding > 0)
+		rev_space_and_char(s);
 }

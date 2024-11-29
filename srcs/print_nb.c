@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 05:20:44 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 11:09:05 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	print_nb(va_list *params, t_flags *flags)
 	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0) && !flags->sign && !flags->space)
 		return ;
 	total_length = buffersize_nb(arg, flags);
-	buffer = calloc(sizeof(int), total_length + 1);
+	buffer = ft_calloc(sizeof(int), total_length + 1);
 	if (!buffer)
 		return ;
-	buffer = itoa(arg, total_length, buffer, flags);
+	buffer = int_toa(arg, total_length, buffer, flags);
 	buffer = manage_flags_nb(flags, buffer, total_length - 1, arg);
 	check_write_error = write(1, buffer, total_length);
 	free(buffer);
@@ -110,7 +110,7 @@ int	count_digits_nb(int n)
 	return (i);
 }
 
-char	*itoa(int n, int len, char *s, t_flags *flags)
+char	*int_toa(int n, int len, char *s, t_flags *flags)
 {
 	long	nb;
 
