@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:11:07 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/28 14:33:38 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 09:15:48 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(void)
 	// printf("\n");
 	// b = 0; //= printf("%.7s%.2s", "hello", "world");
 	// printf("\n a : %d  b : %d\n", a, b);
-	a = ft_printf("%5.10%");
+	a = ft_printf("%#0.5x", 0);
 	printf("\n");
-	b = printf("%-5%");
+	b = printf("%#0.5x", 0);
 	// printf("\n a %d   b %d\n", a, b);
 	// printf("\n");
 	// a = ft_printf("%7.5s", "tubular");

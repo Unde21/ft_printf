@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 06:25:36 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/29 09:15:33 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,15 @@ void	adding_all_flag_buffer(t_flags *flags, char *s, int len, unsigned int n)
 	len -= count_hex_digits(n);
 	if (flags->point)
 	{
-		while (flags->size_precision > 0)
+		while (flags->size_precision > 0 && len >= 0)
 		{
-			s[len] = '0';
-			--len;
+			s[len--] = '0';
 			--flags->size_precision;
 		}
 	}
 	if (flags->prefix && n != 0 && len >= 1 && !flags->zero)
 		len = adding_prefix(flags, s, len, 1);
-	if (flags->zero && flags->point && flags->prefix)
+	if (flags->zero && flags->point && flags->prefix && len >= 1)
 		len = adding_prefix(flags, s, len, 1);
 	adding_precision_buffer(flags, s, len, n);
 }
