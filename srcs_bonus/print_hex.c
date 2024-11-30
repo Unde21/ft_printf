@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 03:52:40 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:08:25 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 18:39:04 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	print_x(va_list *params, t_flags *flags)
 
 	flags->base_to = LOWER_BASE;
 	arg = va_arg(*params, unsigned int);
-	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0))
+	if ((flags->point && flags->precision == -1 && flags->padding == -1
+			&& arg == 0))
 		return ;
 	total_length = buffersize_hex(arg, flags);
 	convert_hex(flags, arg, total_length);
@@ -34,7 +35,8 @@ void	print_upper_x(va_list *params, t_flags *flags)
 
 	flags->base_to = UPPER_BASE;
 	arg = va_arg(*params, unsigned int);
-	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0) && !flags->sign && !flags->space)
+	if ((flags->point && flags->precision == -1 && flags->padding == -1
+			&& arg == 0) && !flags->sign && !flags->space)
 		return ;
 	total_length = buffersize_hex(arg, flags);
 	convert_hex(flags, arg, total_length);
@@ -48,7 +50,7 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 	if (flags->point && flags->precision == -1 && flags->padding != -1)
 	{
 		if (n == 0)
-				buffer_size -= 1;
+			buffer_size -= 1;
 		if (flags->is_precision == false)
 		{
 			if (flags->padding > buffer_size)
@@ -59,16 +61,28 @@ int	buffersize_hex(unsigned int n, t_flags *flags)
 		}
 		flags->precision = flags->padding;
 		flags->size_precision = flags->padding - buffer_size;
-		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 		if (flags->padding - buffer_size > 0)
 			return (flags->padding);
 		return (buffer_size);
 	}
+	buffer_size = calculate_field_hex(flags, buffer_size, n);
+	return (buffer_size);
+}
+
+int	calculate_field_hex(t_flags *flags, int buffer_size, unsigned int n)
+{
 	if (flags->point && flags->precision > buffer_size)
 		flags->size_precision = flags->precision - buffer_size;
 	if (flags->prefix && n != 0)
 		buffer_size += 2;
-	if (flags->padding > buffer_size + flags->size_precision)
+	if (n == 0 && flags->padding > buffer_size && flags->precision == 0)
+	{
+		flags->size_padding = flags->padding - flags->size_precision
+			- buffer_size + 1;
+		if (flags->size_precision == 0)
+			buffer_size -= 1;
+	}
+	else if (flags->padding > buffer_size + flags->size_precision)
 		flags->size_padding = flags->padding - (buffer_size
 				+ flags->size_precision);
 	buffer_size += flags->size_precision + flags->size_padding;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_format.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:09 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/26 14:18:36 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 14:53:18 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,7 @@ int	print_addr(unsigned long ptr, int count, int index)
 
 	check_write_error = 0;
 	if (ptr == 0)
-	{
-		write(1, "(nil)", 5);
-		return (5);
-	}
+		return (write(1, "(nil)", 5));
 	if (index == 0)
 	{
 		count += write(1, "0x", 2);

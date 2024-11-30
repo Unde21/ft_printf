@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 01:48:59 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:09:05 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 15:01:12 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	print_nb(va_list *params, t_flags *flags)
 	int		total_length;
 	char	*buffer;
 	int		check_write_error;
-	
+
 	check_write_error = 0;
 	arg = va_arg(*params, int);
-	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0) && !flags->sign && !flags->space)
+	if ((flags->point && flags->precision == -1 && flags->padding == -1
+			&& arg == 0) && !flags->sign && !flags->space)
 		return ;
 	total_length = buffersize_nb(arg, flags);
 	buffer = ft_calloc(sizeof(int), total_length + 1);
@@ -42,13 +43,15 @@ void	print_nb(va_list *params, t_flags *flags)
 int	buffersize_nb(int n, t_flags *flags)
 {
 	int	buffer_size;
+	int	nb_digits;
 
-	buffer_size = count_digits_nb(n);
+	nb_digits = count_digits_nb(n);
+	buffer_size = nb_digits;
 	if (flags->point && flags->precision == -1 && flags->padding != -1)
 	{
 		if (n == 0)
 			buffer_size -= 1;
-		if (flags->is_precision ==  false)
+		if (flags->is_precision == false)
 		{
 			flags->size_padding = flags->padding - buffer_size;
 			return (flags->padding);
@@ -61,6 +64,12 @@ int	buffersize_nb(int n, t_flags *flags)
 			return (flags->padding);
 		return (buffer_size);
 	}
+	buffer_size = calculate_field_nb(flags, buffer_size, nb_digits, n);
+	return (buffer_size);
+}
+
+int	calculate_field_nb(t_flags *flags, int buffer_size, int nb_digits, int n)
+{
 	if (flags->point && flags->precision > buffer_size)
 	{
 		if (n <= 0)
@@ -72,10 +81,8 @@ int	buffersize_nb(int n, t_flags *flags)
 		buffer_size += 1;
 	if (flags->padding >= buffer_size + flags->size_precision)
 	{
-		if (flags->point && flags->precision >= count_digits_nb(n) && n < 0)
-			flags->size_precision = flags->precision - count_digits_nb(n) + 1;
-		// if (n == 0 && !flags->less && flags->point)
-		// 	buffer_size -= 1;
+		if (flags->point && flags->precision >= nb_digits && n < 0)
+			flags->size_precision = flags->precision - nb_digits + 1;
 		if (n == 0 && flags->point)
 			flags->size_padding = 1;
 		flags->size_padding += flags->padding - (buffer_size
@@ -83,17 +90,16 @@ int	buffersize_nb(int n, t_flags *flags)
 	}
 	buffer_size += flags->size_precision + flags->size_padding;
 	if (n == 0 && flags->point)
-			buffer_size -= 1;
+		buffer_size -= 1;
 	if (flags->space && n >= 0)
 		buffer_size += 1;
-	//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
 	return (buffer_size);
 }
 
 int	count_digits_nb(int n)
 {
-	int		i;
-	
+	int	i;
+
 	i = 0;
 	if (n < 0)
 	{
@@ -122,7 +128,7 @@ char	*int_toa(int n, int len, char *s, t_flags *flags)
 	}
 	if (nb < 0)
 		nb = -nb;
-	while(len-- > 0)
+	while (len-- > 0)
 	{
 		s[len] = (nb % 10) + '0';
 		nb /= 10;

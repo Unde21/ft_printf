@@ -8,8 +8,11 @@ RM := rm -rf
 AR := ar -rcs
 
 SRC_DIR := srcs/
+BONUS_SRCS := srcs_bonus/
 OBJ_DIR := .objs/
 DEP_DIR := .deps/
+OBJB_DIR := .objs_bonus/
+DEPB_DIR := .deps_bonus/
 LIBFT_DIR := libft/
 
 INCS := -I. -I$(LIBFT_DIR)
@@ -30,12 +33,11 @@ SRCSB := srcs_bonus/ft_printf.c \
 	srcs_bonus/print_s.c \
 	srcs_bonus/print_u.c \
 	srcs_bonus/utils.c \
+	srcs_bonus/manage_flags_s.c
 
 OBJS := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
-OBJSB := $(patsubst $(SRCB_DIR)%.c, $(OBJS_DIR)%.o, $(SRCSB))
+OBJSB := $(patsubst $(SRCB_DIR)%.c, $(OBJB_DIR)%.o, $(SRCSB))
 DEPS := $(SRCS:$(SRC_DIR)%.c=$(DEP_DIR)%.d)
-
-BONUS_SRCS :=
 BONUS_OBJS := $(BONUS_SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 
 LIBFT := $(LIBFT_DIR)libft.a
@@ -64,6 +66,14 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR) $(DEP_DIR)
 $(OBJ_DIR) $(DEP_DIR):
 	@mkdir -p $@
 
+
+$(OBJB_DIR)%.o: $(SRCB_DIR)%.c | $(OBJB_DIR) $(DEPB_DIR)
+	@mkdir -p $(dir $@) $(dir $(DEPB_DIR)$*)
+	@$(CC) $(CFLAGS) $(INCS) $(CPPFFLAGS) $(DEPB_DIR)$*.d -c $< -o $@
+
+$(OBJB_DIR) $(DEPB_DIR):
+	@mkdir -p $@
+
 $(LIBFT): FORCE
 	@$(MAKE) -C $(LIBFT_DIR)
 
@@ -71,6 +81,7 @@ bonus: .bonus
 
 .bonus: $(LIBFT) $(OBJSB)
 	$(RM) $(NAME)
+	@$(RM) $(OBJ_DIR) $(DEP_DIR)
 	@cp $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJSB)
 	@echo "$(GREEN)$(BOLD)$(NAME) created successfully!$(END)"
@@ -80,7 +91,7 @@ bonus: .bonus
 FORCE :
 
 clean:
-	@$(RM) $(OBJ_DIR) $(DEP_DIR) .bonus
+	@$(RM) $(OBJ_DIR) $(DEP_DIR) $(OBJB_DIR) $(DEPB_DIR) .bonus
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@echo "$(RED)$(BOLD)Objects cleaned$(END)"
 

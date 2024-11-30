@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:59:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:31:36 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 15:01:44 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,10 @@ char	*manage_flags_addr(t_flags *flags, char *s, int len, unsigned long n)
 
 void	addr_null(char *s, int len, t_flags *flags)
 {
-	char	str[] = "(nil)";
+	char	*str;
 	int		len_str;
 
+	str = "(nil)";
 	len_str = (int)ft_strlen(str);
 	ft_strlcpy(&s[len - len_str], str, 6);
 	len -= len_str + 1;

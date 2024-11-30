@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 03:33:17 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/28 03:56:17 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 15:04:02 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,17 @@
 char	*manage_flags_nb(t_flags *flags, char *s, int len, int n)
 {
 	int	tmp;
-	
+
 	if (n == 0)
 		len -= count_digits_nb(n) - 1;
 	else
 		len -= count_digits_nb(n);
 	tmp = len;
-	if (flags->point)
-	{
-		while (flags->size_precision > 0)
-		{
-			s[len--] = '0';
-			--flags->size_precision;
-		}
-	}
+	len = adding_precision(flags, len, s);
 	if (flags->sign && !flags->zero && n > 0)
 		len = adding_prefix(flags, s, len, 0);
 	else if (flags->sign && !flags->zero && n == 0 && len >= 1)
-		len = adding_prefix(flags, s, len -1, 0);
+		len = adding_prefix(flags, s, len - 1, 0);
 	else if (flags->sign && !flags->zero && n == 0)
 		len = adding_prefix(flags, s, len, 0);
 	if (flags->zero && flags->point && flags->sign)
@@ -94,3 +87,15 @@ void	rev_space_nb(char *s, size_t len)
 	}
 }
 
+int	adding_precision(t_flags *flags, int len, char *s)
+{
+	if (flags->point)
+	{
+		while (flags->size_precision > 0)
+		{
+			s[len--] = '0';
+			--flags->size_precision;
+		}
+	}
+	return (len);
+}

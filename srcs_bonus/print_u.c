@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 05:45:31 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:09:54 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 18:51:55 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	print_unb(va_list *params, t_flags *flags)
 
 	check_write_error = 0;
 	arg = va_arg(*params, unsigned int);
-	if ((flags->point && flags->precision == -1 && flags->padding == -1 && arg == 0))
+	if ((flags->point && flags->precision == -1 && flags->padding == -1
+			&& arg == 0))
 		return ;
 	total_length = buffersize_u_nb(arg, flags);
 	buffer = ft_calloc(sizeof(unsigned int), total_length + 1);
 	if (!buffer)
 		return ;
 	buffer = unsigned_itoa(arg, total_length, buffer, flags);
-	//printf("buff %s", buffer);
 	buffer = manage_flags_u_nb(flags, buffer, total_length - 1, arg);
 	check_write_error = write(1, buffer, total_length);
 	free(buffer);
@@ -43,13 +43,15 @@ void	print_unb(va_list *params, t_flags *flags)
 int	buffersize_u_nb(unsigned int n, t_flags *flags)
 {
 	int	buffer_size;
+	int	nb_digits;
 
-	buffer_size = count_digits_u_nb(n);
+	nb_digits = count_digits_u_nb(n);
+	buffer_size = nb_digits;
 	if (flags->point && flags->precision == -1 && flags->padding != -1)
 	{
 		if (n == 0)
 			buffer_size -= 1;
-		if (flags->is_precision ==  false)
+		if (flags->is_precision == false)
 		{
 			flags->size_padding = flags->padding - buffer_size;
 			return (flags->padding);
@@ -60,6 +62,12 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 			return (flags->padding);
 		return (buffer_size);
 	}
+	buffer_size = calc_field_unb(flags, buffer_size, nb_digits, n);
+	return (buffer_size);
+}
+
+int	calc_field_unb(t_flags *flags, int buffer_size, int n_digit, unsigned int n)
+{
 	if (flags->point && flags->precision > buffer_size)
 	{
 		if (n <= 0)
@@ -69,10 +77,8 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	}
 	if (flags->padding >= buffer_size + flags->size_precision)
 	{
-		if (flags->point && flags->precision >= count_digits_u_nb(n) && n < 0)
-			flags->size_precision = flags->precision - count_digits_u_nb(n) + 1;
-		// if (n == 0 && !flags->less && flags->point)
-		// 	buffer_size -= 1;
+		if (flags->point && flags->precision >= n_digit && n < 0)
+			flags->size_precision = flags->precision - n_digit + 1;
 		if (n == 0 && flags->point)
 			flags->size_padding = 1;
 		flags->size_padding += flags->padding - (buffer_size
@@ -80,8 +86,7 @@ int	buffersize_u_nb(unsigned int n, t_flags *flags)
 	}
 	buffer_size += flags->size_precision + flags->size_padding;
 	if (n == 0 && flags->point)
-			buffer_size -= 1;
-	//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
+		buffer_size -= 1;
 	return (buffer_size);
 }
 
@@ -104,7 +109,6 @@ char	*unsigned_itoa(unsigned int n, int len, char *s, t_flags *flags)
 {
 	if (n == 0 && flags->size_precision != 0)
 	{
-
 		s[len] = '0';
 		return (s);
 	}

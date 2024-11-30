@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 01:49:05 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:08:11 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 14:52:45 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*manage_flags_c(t_flags *flags, char *s, int len, int c)
 		s[len] = c;
 		--len;
 	}
-	while (flags->size_padding  > 0)
+	while (flags->size_padding > 0)
 	{
 		s[len] = ' ';
 		--len;

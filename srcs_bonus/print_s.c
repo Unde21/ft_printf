@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_s.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/30 15:09:53 by samaouch          #+#    #+#             */
+/*   Updated: 2024/11/30 17:28:27 by samaouch         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -32,30 +44,42 @@ void	print_s(va_list *params, t_flags *flags)
 int	buffersize_s(char *str, t_flags *flags)
 {
 	int	buffer_size;
+	int	len_str;
 
 	if (str == NULL)
-		buffer_size = 6;
+		len_str = 6;
 	else
-		buffer_size = (int)ft_strlen(str);
-	if (str[0] == '\0' && flags->point && flags->padding != -1 && flags->precision != -1)
-		{
-			flags->size_padding = flags->padding;
-			return (flags->size_padding);
-		}
-	if (flags->point && flags->precision == -1 && flags->padding != -1 && str != NULL)
+		len_str = (int)ft_strlen(str);
+	buffer_size = len_str;
+	if (str[0] == '\0' && flags->point && flags->padding != -1
+		&& flags->precision != -1)
 	{
-		if (flags->is_precision == false)
-		{
-			flags->size_padding = flags->padding;
-			return (flags->padding);
-		}
-		flags->precision = flags->padding;
-		flags->size_precision = flags->padding - buffer_size;
-		//printf("buffer : %d, paddin %d preci %d\n", buffer_size, flags->size_padding, flags->size_precision);
-		if (flags->padding > buffer_size)
-			return (buffer_size);
-		return (flags->precision);
+		flags->size_padding = flags->padding;
+		return (flags->size_padding);
 	}
+	if (flags->point && flags->precision == -1 && flags->padding != -1
+		&& str != NULL)
+		return (calculate_size_precision_s(flags, buffer_size));
+	buffer_size = calculate_field_s(flags, buffer_size);
+	return (buffer_size);
+}
+
+int	calculate_size_precision_s(t_flags *flags, int buffer_size)
+{
+	if (flags->is_precision == false)
+	{
+		flags->size_padding = flags->padding;
+		return (flags->padding);
+	}
+	flags->precision = flags->padding;
+	flags->size_precision = flags->padding - buffer_size;
+	if (flags->padding > buffer_size)
+		return (buffer_size);
+	return (flags->precision);
+}
+
+int	calculate_field_s(t_flags *flags, int buffer_size)
+{
 	if (flags->point)
 	{
 		if (flags->precision < buffer_size)
@@ -67,7 +91,6 @@ int	buffersize_s(char *str, t_flags *flags)
 			flags->size_precision = flags->precision - buffer_size;
 		if (flags->padding != -1 && flags->padding > buffer_size)
 			flags->size_padding = flags->padding - buffer_size;
-
 	}
 	if (flags->padding > flags->size_precision)
 	{
@@ -78,36 +101,4 @@ int	buffersize_s(char *str, t_flags *flags)
 	}
 	buffer_size += flags->size_padding;
 	return (buffer_size);
-}
-
-void	manage_flags_s(t_flags *flags, char *s, char *str)
-{
-	size_t	i;
-	int		len_str;
-
-	len_str = (int)ft_strlen(str);
-	i = 0;
-	if (flags->less)
-	{
-		if (flags->size_precision == 0 || flags->size_precision > len_str || !flags->point)
-			flags->precision = len_str;
-		ft_strlcpy(&s[i], str, flags->precision + 1);
-		len_str = ft_strlen(s);
-		while (flags->size_padding > 0)
-		{
-			s[len_str + i++] = ' ';
-			--flags->size_padding;
-		}
-	}
-	else
-	{	
-		if (flags->size_precision == 0 || flags->size_precision > len_str || !flags->point)
-			flags->precision = len_str;
-		while (flags->size_padding > 0)
-		{
-			s[i++] = ' ';
-			--flags->size_padding;
-		}
-		ft_strlcpy(&s[i], str, flags->precision + 1);
-	}
 }

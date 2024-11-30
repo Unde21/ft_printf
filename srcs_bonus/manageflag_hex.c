@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 02:15:48 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/29 11:34:43 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 18:38:34 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ char	*ft_itoa_base_hex(unsigned long n, t_flags *flags, int len, char *s)
 	base_to = flags->base_to;
 	if (n == 0)
 	{
-		s[len] = '0';
+		if (len >= 0)
+			s[len] = '0';
+		else
+			s[0] = '0';
 		return (s);
 	}
 	while (n > 0)

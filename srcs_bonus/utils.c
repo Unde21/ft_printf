@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 04:36:14 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/27 02:10:17 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 15:09:38 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ void	rev_space_and_char(char *str)
 		++i;
 		++j;
 	}
+}
+
+int	skip_zero(char *format)
+{
+	size_t	index;
+
+	index = 1;
+	while (*format + index == '0')
+		++index;
+	return (index);
 }

@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 12:34:02 by sammy             #+#    #+#             */
-/*   Updated: 2024/11/28 04:32:12 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 14:52:18 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,13 @@
 char	*manage_flags_u_nb(t_flags *flags, char *s, int len, unsigned int n)
 {
 	int	tmp;
-	
+
 	if (n == 0)
 		len -= count_digits_u_nb(n) - 1;
 	else
 		len -= count_digits_u_nb(n);
 	tmp = len;
-	if (flags->point)
-	{
-		while (flags->size_precision > 0)
-		{
-			s[len--] = '0';
-			--flags->size_precision;
-		}
-	}
+	len = adding_precision(flags, len, s);
 	if (flags->zero && !flags->point && !flags->less)
 	{
 		while (flags->size_padding > 0)
