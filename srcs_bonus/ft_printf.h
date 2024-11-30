@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/30 19:54:48 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/11/30 20:01:37 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int			print_addr(unsigned long ptr, int count, int index);
 int			pos_next_format(char *format);
 int			parse_format(va_list *params, char *format, t_flags *flags);
 int			parse_flags(char *format, t_flags *flags);
-int			ft_printf(const char *format, ...)__attribute__((format(printf, 1, 2)));
+int			ft_printf(const char *format, ...) __attribute__((format(printf, 1,
+						2)));
 int			format_is_valid(const char *format);
 int			count_hex_digits(unsigned long n);
 int			count_digits_u_nb(unsigned int n);
