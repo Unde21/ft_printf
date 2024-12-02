@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 02:07:34 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/30 14:41:25 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/12/02 10:33:29 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	check_flg_format(va_list *params, char *format, t_flags *flags)
 	if (*(format + pos_next) == 'c')
 		print_c(params, flags);
 	if (*(format + pos_next) == '%')
+	{
 		print_char('%');
+		flags->count += 1;
+	}
 	return (pos_next);
 }
 

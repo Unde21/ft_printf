@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sammy <sammy@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 10:00:00 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/17 18:44:41 by sammy            ###   ########lyon.fr   */
+/*   Updated: 2024/12/02 10:26:16 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft.h"
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <stddef.h>
@@ -23,6 +23,8 @@ int	ft_printf(const char *format, ...)
 
 	count = 0;
 	va_start(params, format);
+	if (!format)
+		return (-1);
 	if (format_is_valid(format) == -1)
 		return (-1);
 	while (*format != '\0')

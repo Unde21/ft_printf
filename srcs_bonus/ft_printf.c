@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/30 19:54:20 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/12/02 10:30:15 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_printf(const char *format, ...)
 	va_start(params, format);
 	flags = malloc(sizeof(t_flags));
 	if (!flags)
-		return (0);
+		return (-2);
 	flags->count = 0;
 	reset_struct(flags);
 	count = parse_format(&params, (char *)format, flags);
@@ -37,6 +37,8 @@ int	ft_printf(const char *format, ...)
 
 int	parse_format(va_list *params, char *format, t_flags *flags)
 {
+	if (!format)
+		return (-1);
 	while (*format != '\0')
 	{
 		if (*format == '%')

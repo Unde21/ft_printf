@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 01:30:56 by samaouch          #+#    #+#             */
-/*   Updated: 2024/11/30 20:01:37 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/12/02 10:23:18 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdarg.h>
 # include <stdbool.h>
 # include <stddef.h>
-# include <stdio.h>
 
 # define LOWER_BASE "0123456789abcdef"
 # define UPPER_BASE "0123456789ABCDEF"

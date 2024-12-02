@@ -8,7 +8,7 @@ RM := rm -rf
 AR := ar -rcs
 
 SRC_DIR := srcs/
-BONUS_SRCS := srcs_bonus/
+SRCB_DIR := srcs_bonus/
 OBJ_DIR := .objs/
 DEP_DIR := .deps/
 OBJB_DIR := .objs_bonus/
@@ -38,7 +38,8 @@ SRCSB := srcs_bonus/ft_printf.c \
 OBJS := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 OBJSB := $(patsubst $(SRCB_DIR)%.c, $(OBJB_DIR)%.o, $(SRCSB))
 DEPS := $(SRCS:$(SRC_DIR)%.c=$(DEP_DIR)%.d)
-BONUS_OBJS := $(BONUS_SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
+DEPSB := $(SRCSB:$(SRCB_DIR)%.c=$(DEPB_DIR)%.d)
+
 
 LIBFT := $(LIBFT_DIR)libft.a
 
@@ -49,11 +50,13 @@ BLUE := \033[0;34m
 END := \033[0m
 
 
-.PHONY: all clean fclean re bonus libft
+.PHONY: all clean fclean re bonus libft FORCE
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
+	$(RM) $(NAME)
+	@$(RM) $(OBJB_DIR) $(DEPB_DIR)
 	@cp $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(OBJS)
 	@echo "$(GREEN)$(BOLD)$(NAME) created successfully!$(END)"
@@ -103,3 +106,4 @@ fclean: clean
 re: fclean all
 
 -include $(DEPS)
+-include $(DEPSB)
