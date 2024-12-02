@@ -6,7 +6,7 @@
 /*   By: samaouch <samaouch@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 00:38:27 by samaouch          #+#    #+#             */
-/*   Updated: 2024/12/02 10:30:15 by samaouch         ###   ########lyon.fr   */
+/*   Updated: 2024/12/02 13:12:55 by samaouch         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	parse_format(va_list *params, char *format, t_flags *flags)
 		if (*format == '%')
 		{
 			if (*format + 1)
-			{
+			{ 
 				++format;
 				if (parse_flags(format, flags))
 				{
